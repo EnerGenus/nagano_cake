@@ -1,3 +1,4 @@
+
 ja:
   enums:
     order_detail:
@@ -10,6 +11,12 @@ ja:
       payment_method:
         credit_card: "クレジットカード"
         transfer: "銀行振込"
+      status:
+        waiting_for_payment: "入金待ち"
+        payment_confirmed: "入金確認"
+        in_production: "製作中"
+        preparing_for_shipment: "発送準備中"
+        shipped: "発送済み"
   errors:
     massages:
       not_saved:エラーが発生したため、保存されませんでした。
