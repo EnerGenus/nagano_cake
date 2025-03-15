@@ -1,10 +1,6 @@
 # frozen_string_literal: true
 
 class DeviseCreateCustomers < ActiveRecord::Migration[6.1]
-  has_many :cart_items, dependent: :destroy
-  has_many :orders
-  has_many :addresses,  dependent: :destroy
-
   def change
     create_table :customers do |t|
       ## Database authenticatable
@@ -42,7 +38,7 @@ class DeviseCreateCustomers < ActiveRecord::Migration[6.1]
       t.string :postal_code, null:false
       t.string :address, null:false
       t.string :phone_number, null:false
-
+      
       t.timestamps null: false
     end
 
