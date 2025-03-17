@@ -4,7 +4,7 @@ Rails.application.routes.draw do
     root to: 'homes#top'
   get 'customers/show'
   get 'customers/edit'
-
+  end
   scope module: :public do
     root 'homes#top'
     get 'homes/about' => 'homes#about', as: 'about'
