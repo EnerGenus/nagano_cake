@@ -1,4 +1,6 @@
 Rails.application.routes.draw do
+  get 'customers/show'
+  get 'customers/edit'
   scope module: :public do
     root 'homes#top'
     get 'homes/about' => 'homes#about', as: 'about'
