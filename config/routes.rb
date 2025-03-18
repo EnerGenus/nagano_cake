@@ -5,9 +5,11 @@ Rails.application.routes.draw do
     root to: 'homes#top'
   get 'customers/show'
   get 'customers/edit'
+
   end
   scope module: :public do
     root 'homes#top'
+    resources :addresses, only: [:index, :create, :edit, :update, :destroy]
     get 'homes/about' => 'homes#about', as: 'about'
     get 'customers/check' => 'customers#check'
     patch 'customers/withdraw' => 'customers#withdraw'
