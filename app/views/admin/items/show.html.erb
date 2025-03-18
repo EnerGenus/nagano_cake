@@ -18,7 +18,7 @@
   </tr>
   <tr>
     <th>税込価格</br>(税抜価格)</th>
-    <td><%= @item.tax_in_price %>(<%= @item.price %>)円</td>
+    <td><%= ((@item.price * 1.1).round)%>円(<%= @item.price %>円）</td>
   </tr>
   <tr>
     <th>販売ステータス</th>
@@ -30,8 +30,8 @@
       <% end %>
     </td>
   </tr>
-  <tr>
-    <th><%= link_to "編集する", edit_admin_item_path, class: 'btn btn-success' %></th>
-  </tr>
-  
 </table>
+<div>
+    <%= link_to "編集する", edit_admin_item_path, class: 'btn btn-success' %>
+</div>
+  
