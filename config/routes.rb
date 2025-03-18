@@ -6,21 +6,19 @@ Rails.application.routes.draw do
   get 'customers/show'
   get 'customers/edit'
   end
+
   scope module: :public do
     root 'homes#top'
     get 'homes/about' => 'homes#about', as: 'about'
     get 'customers/check' => 'customers#check'
     patch 'customers/withdraw' => 'customers#withdraw'
-    get "customers/mypage" => "customers#show"
-    get "customers/information" => "customer#edit"
-    patch "customers/information" => "customers#update"
+    resources :customer , only:[:edit,:create,:destroy,:update]
   end
 
-  devise_for :customers, skip: [:passwords], controllers: {
+  devise_for :customers,skip: [:passwords], controllers: {
     registrations: "public/registrations",
     sessions: "public/sessions"
   }
-
     devise_for :admin, skip: [:registrations, :passwords] ,controllers: {
     sessions: "admin/sessions"
   }

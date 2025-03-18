@@ -17,6 +17,12 @@ class Public::CustomersController < ApplicationController
   def check
   end
 
+  def edit
+  end
+
+  def update
+  end
+
   def withdraw
     @customer = Customer.find(current_customer.id)
     @customer.update(is_active: false)
