@@ -15,9 +15,9 @@ Rails.application.routes.draw do
   scope module: :public do
     root 'homes#top'
     get 'homes/about' => 'homes#about', as: 'about'
+    get  '/customers/unsubscribe' => 'customers#unsubscribe', as:'unsubscribe' #確認画面へのパス
+    patch '/customers/withdraw' => 'customers#withdraw', as:'withdraw' #退会処理用のアクションパス
     resources :customers,only: [:show,:edit,:update]
-    get  '/customers/unsubscribe' => 'customers#unsubscribe' #確認画面へのパス
-    patch '/customers/withdraw' => 'customers#withdraw' #退会処理用のアクションパス
   end
 
 
