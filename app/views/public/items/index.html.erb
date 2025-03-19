@@ -1,18 +1,13 @@
 <h3>商品一覧(全<%= @all_items.count %>件)</h3>
 <% @items.each do |item| %>
-  <div>
+  <% if item.is_active == true %>
       <div class="card">
         <%= link_to item_path(item.id) do %>
           <%= image_tag item.item_image, size: "150x150" %>
         <% end %>
         <%= item.name %></br>
-        ¥ <%= item.price %>
-        <% if item.is_active == true %>
-          <p class="text-success">販売中</p>
-        <% else %>
-          <p class="text-secondary">販売停止中</p>
-        <% end %>
+        ¥ <%= ((item.price * 1.1).round)%>
       </div>
-  </div>
+  <% end %>
 <% end %>
 <%= paginate @items %>
