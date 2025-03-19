@@ -1,7 +1,7 @@
 class Admin::OrdersController < ApplicationController
-
-  def index
-    @customer = Customer.find(params[:customer_id])
-    @orders = @customer.orders
-  end
+  #作成途中
+  # def index
+  #   @customer = Order.find(params[:customer_id])
+  #   @orders = @customer.orders
+  # end
 end
