@@ -17,7 +17,7 @@ class Public::CustomersController < ApplicationController
   def edit
   end
 
-  def check
+  def unsubscribe
   end
 
   def withdraw
