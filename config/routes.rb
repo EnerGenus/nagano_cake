@@ -4,7 +4,8 @@ Rails.application.routes.draw do
     resources :genres, only: [:index, :create, :edit, :update]
     resources :items, only: [:new, :index, :create, :show, :edit, :update]
     root to: 'homes#top'
-    resources :customers, only: [:show, :edit]
+    resources :customers, only: [:show, :index, :edit, :update]
+    resources :orders, only: [:index]
   end
 
   devise_for :customers,skip: [:passwords], controllers: {
