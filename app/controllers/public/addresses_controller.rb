@@ -13,6 +13,7 @@ class Public::AddressesController < ApplicationController
       redirect_to request.referer, notice: '配送先を登録しました'
     else
       @addresses = current_customer.addresses
+      @address = Address.new
       flash.now[:alert] = "配送先の登録に失敗しました。" 
       render :index
     end
