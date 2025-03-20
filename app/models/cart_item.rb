@@ -4,7 +4,6 @@ class CartItem < ApplicationRecord
   belongs_to :order
 
   def subtotal
-    item.price_including_tax * quantity
+    item.with_tax_price * amount
   end
-
 end
