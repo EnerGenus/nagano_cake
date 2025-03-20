@@ -12,6 +12,7 @@ Rails.application.routes.draw do
     root 'homes#top'
     resources :addresses, only: [:index, :create, :edit, :update, :destroy]
     get 'homes/about' => 'homes#about', as: 'about'
+    resources :items, only: [:index, :show]
     get 'customers/mypage' => 'customers#show'
     get 'customers/information/edit' => 'customers#edit'
     get 'customers/information' => 'customer#update'
