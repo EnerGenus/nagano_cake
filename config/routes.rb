@@ -4,23 +4,22 @@ Rails.application.routes.draw do
     resources :genres, only: [:index, :create, :edit, :update]
     resources :items, only: [:new, :index, :create, :show, :edit, :update]
     root to: 'homes#top'
-    resources :customers, only: [:show, :edit]
+  get 'customers/show'
+  get 'customers/edit'
+  end
+  scope module: :public do
+    root 'homes#top'
+    resources :addresses, only: [:index, :create, :edit, :update, :destroy]
+    get 'homes/about' => 'homes#about', as: 'about'
+    get 'customers/check' => 'customers#check'
+    patch 'customers/withdraw' => 'customers#withdraw'
   end
 
-  devise_for :customers,skip: [:passwords], controllers: {
+  devise_for :customers, controllers: {
     registrations: "public/registrations",
     sessions: "public/sessions"
   }
-
-  scope module: :public do
-    root 'homes#top'
-    get 'homes/about' => 'homes#about', as: 'about'
-    resources :customers,only: [:show,:edit,:update]
-    get  '/customers/unsubscribe' => 'customers#unsubscribe' #確認画面へのパス
-    patch '/customers/withdraw' => 'customers#withdraw' #退会処理用のアクションパス
-  end
-
-
+  
     devise_for :admin, skip: [:registrations, :passwords] ,controllers: {
     sessions: "admin/sessions"
   }

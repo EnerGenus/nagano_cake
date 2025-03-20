@@ -1,0 +1,44 @@
+<div class="container">
+  <div class="row">
+    <h3 class="col-md-11">配送先登録 / 一覧</h3>
+  </div>
+  <div class="row">
+    <div class="col-md-11 mx-auto">
+      <% if @address.errors.any? %>
+        <div class="alert alert-danger">
+          <ul>
+            <% @address.errors.full_messages.each do |message| %>
+              <li><%= message %></li>
+            <% end %>
+          </ul>
+        </div>
+      <% end %>
+      <%= render partial: 'address_form', locals: { address: @address, obj: "新規登録" } %>
+    </div>
+  </div>
+  <div class="row">
+    <table class="table table-bordered">
+      <thead>
+        <tr>
+          <th>郵便番号</th>
+          <th>住所</th>
+          <th>宛名</th>
+          <th></th>
+        </tr>
+      </thead>
+      <tbody>
+        <% @addresses.each do |address| %>
+          <tr>
+            <td><%= address.postal_code %></td>
+            <td><%= address.address %></td>
+            <td><%= address.name %></td>
+            <td>
+              <%= link_to "編集する", edit_address_path(address), class: "btn btn-success" %>
+              <%= link_to "削除する", address, method: :delete, data: { confirm: "本当に削除しますか？" }, class: "btn btn-danger" %>
+            </td>
+          </tr>
+        <% end %>
+      </tbody>
+    </table>
+  </div>
+</div>
