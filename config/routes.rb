@@ -7,14 +7,10 @@ Rails.application.routes.draw do
     resources :customers, only: [:show, :index, :edit, :update]
     resources :orders, only: [:index]
   end
-
-  devise_for :customers,skip: [:passwords], controllers: {
-    registrations: "public/registrations",
-    sessions: "public/sessions"
-  }
-
+  
   scope module: :public do
     root 'homes#top'
+    resources :addresses, only: [:index, :create, :edit, :update, :destroy]
     get 'homes/about' => 'homes#about', as: 'about'
     get 'customers/mypage' => 'customers#show'
     get 'customers/information/edit' => 'customers#edit'
@@ -23,7 +19,11 @@ Rails.application.routes.draw do
     patch 'customers/withdraw' => 'customers#withdraw', as:'withdraw' #退会処理用のアクションパス
   end
 
-
+  devise_for :customers, controllers: {
+    registrations: "public/registrations",
+    sessions: "public/sessions"
+  }
+  
     devise_for :admin, skip: [:registrations, :passwords] ,controllers: {
     sessions: "admin/sessions"
   }
