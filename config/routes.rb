@@ -18,6 +18,9 @@ Rails.application.routes.draw do
     get 'customers/information' => 'customer#update'
     get  'customers/unsubscribe' => 'customers#unsubscribe', as:'unsubscribe' #確認画面へのパス
     patch 'customers/withdraw' => 'customers#withdraw', as:'withdraw' #退会処理用のアクションパス
+    resources :orders, only: [:new, :create, :index, :show]
+    get 'orders/done'
+    post 'orders/confirm'
   end
 
   devise_for :customers, controllers: {
