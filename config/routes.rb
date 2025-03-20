@@ -15,7 +15,7 @@ Rails.application.routes.draw do
     resources :items, only: [:index, :show]
     get 'customers/mypage' => 'customers#show'
     get 'customers/information/edit' => 'customers#edit'
-    get 'customers/information' => 'customer#update'
+    patch 'customers/information' => 'customers#update'
     get  'customers/unsubscribe' => 'customers#unsubscribe', as:'unsubscribe' #確認画面へのパス
     patch 'customers/withdraw' => 'customers#withdraw', as:'withdraw' #退会処理用のアクションパス
   end
