@@ -1,7 +1,7 @@
 class Public::OrdersController < ApplicationController
   def new
     @order = Order.new
-    @addresses = current_member.addresses.all  # 会員が登録した配送先一覧を取得
+    @addresses = current_customer.addresses.all  # 会員が登録した配送先一覧を取得
   end
 
   def confirm
