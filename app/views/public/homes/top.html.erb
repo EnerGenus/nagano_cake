@@ -18,3 +18,18 @@
   購入には会員登録が必要になります。
 </p>
 
+<h2>新着商品</h2>
+<div class="d-flex flex-wrap">
+  <% @items.each do |item| %>
+    <div class="card m-2 p-1 card-hover">
+      <%= link_to item_path(item.id) do %>
+        <%= image_tag item.item_image, size: "150x150" %>
+      <% end %>
+      <div class="card-body text-body">
+        <h5 class="card-title"><%= item.name %></h5>
+        <p class="card-text">¥ <%= item.price %></p>
+      </div>
+    </div>
+  <% end %>
+</div>
+<div><%= link_to "全ての商品を見る＞", items_path %></div>

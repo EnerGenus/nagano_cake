@@ -1,13 +1,17 @@
 <h3>商品一覧(全<%= @all_items.count %>件)</h3>
-<% @items.each do |item| %>
-  <% if item.is_active == true %>
-      <div class="card">
+<div class="d-flex flex-wrap">
+  <% @items.each do |item| %>
+    <% if item.is_active == true %>
+      <div class="card m-2 p-1 card-hover" style="width: 18rem;">
         <%= link_to item_path(item.id) do %>
           <%= image_tag item.item_image, size: "150x150" %>
         <% end %>
-        <%= item.name %></br>
-        ¥ <%= ((item.price * 1.1).round)%>
+        <div class="card-body text-body">
+          <h5 class="card-title"><%= item.name %></h5>
+          <p class="card-text">¥ <%= item.with_tax_price %></p>
+        </div>
       </div>
+    <% end %>
   <% end %>
-<% end %>
-<%= paginate @items %>
+</div>
+<%= paginate @items, class: "text-center" %>
