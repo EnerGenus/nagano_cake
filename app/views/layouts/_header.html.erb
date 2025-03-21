@@ -3,24 +3,31 @@
     <div class="container">
       <a class="navbar-brand" href="/"><span>LOGO(仮）</span></a>
       <ul class="navbar-nav ml-auto">
-        <% if admin_signed_in? %>
-        <!-- リンク先が完成次第コメントアウト外す -->
-          <li>
-            <%#= link_to '商品一覧', %>
-          </li>
-          <li>
-            <%#= link_to '会員一覧', %>
-          </li>
-          <li>
-            <%#= link_to '注文履歴一覧', %>
-          </li>
-          <li>
-            <%#= link_to 'ジャンル一覧', %>
-          </li>
-          <li>
-            <%= link_to 'ログアウト', destroy_admin_session_path %>
-          </li>
-        <% end %>
+        <table>
+          <% if admin_signed_in? %>
+            <tr>
+              <td><%= link_to '商品一覧',admin_items_path %></td>
+              <td><%= link_to '会員一覧', admin_customers_path %></td>
+              <td><%= link_to '注文履歴一覧', admin_orders_path %></td>
+              <td><%= link_to 'ジャンル一覧', admin_genres_path %></td>
+              <td><%= link_to 'ログアウト', destroy_admin_session_path %></td>
+            </tr>
+          <% elsif customer_signed_in? %>
+            <tr>
+              <td><%= link_to 'マイページ',customers_mypage_path %></td>
+              <td><%= link_to '商品一覧', items_path %></td>
+              <td><%= link_to 'カート', cart_items_path %></td>
+              <td><%= link_to 'ログアウト', destroy_customer_session_path %></td>
+            </tr>
+          <% else %>
+            <tr>
+              <td><%= link_to 'About',about_path %></td>
+              <td><%= link_to '商品一覧', items_path %></td>
+              <td><%= link_to '新規登録', new_customer_registration_path %></td>
+              <td><%= link_to 'ログイン', new_customer_session_path %></td>
+            </tr>
+          <% end %>
+        </table>
       </ul>
     </div>
   </nav>
