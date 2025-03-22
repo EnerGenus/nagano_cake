@@ -24,10 +24,6 @@ class Public::OrdersController < ApplicationController
 
   def create
     @order = Order.new(order_params)
-    @order.customer_id = current_customer.id
-    @order.shipping_cost = 800
-    @order.total_payment = params[:total].to_i + 800
-    @order.status = 0
     if @order.save
       # カート内の商品を OrderDetail に保存
       @cart_items = CartItem.where(customer_id: current_customer.id)
@@ -56,9 +52,17 @@ class Public::OrdersController < ApplicationController
   end
 
   def index
+      @orders = Order.where(customer_id: current_customer.id)
+  end
+
+  def edit
+  end
+
+  def update
   end
 
   def show
+    @order = Order.find(params[:id])
   end
 
   private
