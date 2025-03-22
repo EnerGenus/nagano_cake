@@ -1,8 +1,12 @@
+<div class="container mt-5">
 <h3>商品一覧</h3>
-<%= link_to new_admin_item_path do %>
-  <i class="fa-solid fa-plus"></i>
+<div class="pl-5">
+<p class="my-3"><%= link_to new_admin_item_path do %>
+  <button type="button" class="btn btn-outline-secondary btn-rounded btn-floating" >
+    <i class="fa-solid fa-plus"></i>
+  </button>
 <% end %>
-<table>
+<table class="table">
   <thead>
     <tr>
       <th>商品ID</th>
@@ -35,3 +39,4 @@
   <% end %>
 </table>
 <%= paginate @items %>
+</div>
