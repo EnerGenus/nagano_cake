@@ -12,9 +12,9 @@
     <% @orders.each do |order| %>
       <tr>
         <!-- ordersコントローラーができたら注文詳細へのリンク埋め込む -->
-        <td><%= order.created_at %></td>
-        <td><%= order.user.name %></td>
-        <td><%= order.items.count %></td>
+        <td><%= link_to order.created_at, admin_order_path(order) %></td>
+        <td><%= order.customer.family_name %><%= order.customer.first_name %></td>
+        <td><%= order.order_detail.sum(:amount_ordered) %></td>
         <td><%= order.status %></td>
       </tr>
     <% end %>

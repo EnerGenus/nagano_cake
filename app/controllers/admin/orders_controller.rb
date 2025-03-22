@@ -10,9 +10,14 @@ class Admin::OrdersController < ApplicationController
     @order_details
   end
 
-  def update
+  def update_order
     @order.update(order_params)
-    redirext_to admin_order_path(@order), notice:"注文ステータスを更新しました"
+    redirect_to admin_order_path(@order), notice:"注文ステータスを更新しました"
+  end
+
+  def update_item
+    @order_detail.update(order_detail_params)
+    ridirext_to admin_order_path()
   end
 
 
