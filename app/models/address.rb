@@ -5,4 +5,9 @@ class Address < ApplicationRecord
   validates :address, presence: true
   validates :name, presence: true
 
+  # view/pubric/orders/new.html.erbで使うメソッド
+  def address_display
+    '〒' + postal_code + ' ' + address + ' ' + name
+  end
+
 end
