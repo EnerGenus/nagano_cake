@@ -3,25 +3,22 @@ class Admin::OrdersController < ApplicationController
 
   def show
     @order = Order.find(params[:id])
+    @order_details = @order.order_detail
   end
 
   def index
-    @orders = Order.all # 仮
-    @order_details
+    @orders = Order.all 
   end
 
-  def update_order
+  def update
+    @order = Order.find(params[:id])
     @order.update(order_params)
-    redirect_to admin_order_path(@order), notice:"注文ステータスを更新しました"
+    redirect_to admin_order_path(@order)
   end
-
-  def update_item
-    @order_detail.update(order_detail_params)
-    ridirext_to admin_order_path()
-  end
-
 
   private
-
+  def order_params
+    params.require(:order).permit(:status)
+  end
 
 end
