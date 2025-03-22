@@ -9,6 +9,14 @@
     </tr>
   </thead>
   <tbody>
-
+    <% @orders.each do |order| %>
+      <tr>
+        <!-- ordersコントローラーができたら注文詳細へのリンク埋め込む -->
+        <td><%= order.created_at %></td>
+        <td><%= order.user.name %></td>
+        <td><%= order.items.count %></td>
+        <td><%= order.status %></td>
+      </tr>
+    <% end %>
   </tbody>
 </table>
