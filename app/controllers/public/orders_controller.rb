@@ -19,9 +19,37 @@ class Public::OrdersController < ApplicationController
       @order.name = @address.name
     end
     # お届け先に「新しいお届け先」が選択されている場合は、view内の記述で格納済み
+    @cart_items = CartItem.all
   end
 
   def create
+    @order = Order.new(order_params)
+    @order.customer_id = current_customer.id
+    @order.shipping_cost = 800
+    @order.total_payment = params[:total].to_i + 800
+    @order.status = 0
+    if @order.save
+      # カート内の商品を OrderDetail に保存
+      @cart_items = CartItem.where(customer_id: current_customer.id)
+      @cart_items.each do |cart_item|
+        order_detail = OrderDetail.new(
+          order_id: @order.id,
+          item_id: cart_item.item.id,
+          price_including_tax: cart_item.item.with_tax_price,
+          amount_ordered: cart_item.amount,
+          making_status: 0  # デフォルトの製作ステータス
+        )
+        order_detail.save
+      end
+  
+      # カートを空にする
+      current_customer.cart_items.destroy_all
+  
+      # 注文完了ページへリダイレクト
+      redirect_to orders_done_path
+    else
+      render :confirm
+    end
   end
 
   def done
@@ -36,10 +64,14 @@ class Public::OrdersController < ApplicationController
   private
   def order_params
     params.require(:order).permit(
+      :customer_id,
+      :shipping_cost,
+      :total_payment,
+      :status,
       :payment_method,
       :postal_code,
       :address,
       :name
-    )
+    ).merge(status: params[:order][:status].to_i)
   end
 end
