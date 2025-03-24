@@ -7,7 +7,7 @@ class Admin::OrdersController < ApplicationController
   end
 
   def index
-    @orders = Order.all 
+    @orders = Order.all
   end
 
   def update
