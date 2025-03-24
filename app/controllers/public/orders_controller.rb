@@ -24,7 +24,7 @@ class Public::OrdersController < ApplicationController
 
   def create
     @order = Order.new(order_params)
-    if @order.save
+    if @order.save!
       # カート内の商品を OrderDetail に保存
       @cart_items = CartItem.where(customer_id: current_customer.id)
       @cart_items.each do |cart_item|
