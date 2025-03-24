@@ -1,7 +1,16 @@
 class Public::OrdersController < ApplicationController
+  before_action :authenticate_customer!
+
   def new
     @order = Order.new
-    @addresses = current_customer.addresses.all  # 会員が登録した配送先一覧を取得
+    @addresses = current_customer.addresses  # 会員が登録した配送先一覧を取得
+    @cart_items = current_customer.cart_items
+    if @cart_items.empty?
+      flash[:notice] = "カートに商品が入っていません"
+      redirect_to cart_items_path # カートページ
+    else
+      render :new # 情報入力ページ
+    end
   end
 
   def confirm
@@ -19,7 +28,7 @@ class Public::OrdersController < ApplicationController
       @order.name = @address.name
     end
     # お届け先に「新しいお届け先」が選択されている場合は、view内の記述で格納済み
-    @cart_items = CartItem.all
+    @cart_items = CartItem.where(customer_id: current_customer.id)
   end
 
   def create
@@ -52,7 +61,7 @@ class Public::OrdersController < ApplicationController
   end
 
   def index
-      @orders = Order.where(customer_id: current_customer.id)
+    @orders = Order.where(customer_id: current_customer.id)
   end
 
   def edit
