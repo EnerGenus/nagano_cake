@@ -8,15 +8,15 @@ ja:
         making: "製作中"
         complete: "制作完了"
     order:
-      payment_method:
-        credit_card: "クレジットカード"
-        transfer: "銀行振込"
       status:
         waiting_for_payment: "入金待ち"
         payment_confirmed: "入金確認"
         in_production: "製作中"
         preparing_for_shipment: "発送準備中"
         shipped: "発送済み"
+      payment_method:
+        credit_card: "クレジットカード"
+        transfer: "銀行振込"
   activerecord:
     errors:
       messages:
