@@ -75,7 +75,7 @@ class Public::OrdersController < ApplicationController
       :payment_method,
       :postal_code,
       :address,
-      :name
+      :name,
     ).merge(status: params[:order][:status].to_i)
   end
 end
