@@ -21,11 +21,15 @@ class Public::OrdersController < ApplicationController
       @order.address = current_customer.address
       @order.name = current_customer.family_name + current_customer.first_name
     elsif params[:order][:address_option] == "1" 
-      # address_option=0 つまり「お届け先」で「登録済住所から選択」を選択している時
+      # address_option=1 つまり「お届け先」で「登録済住所から選択」を選択している時
       @address = Address.find(params[:order][:address_id])
       @order.postal_code = @address.postal_code
       @order.address = @address.address
       @order.name = @address.name
+    elsif params[:order][:address_option] == "2"
+      @order.postal_code.blank? || @order.address.blank? || @order.name.blank?
+      flash.now[:notice] = "新しいお届け先の情報をすべて入力してください。"
+      render :new and return
     end
     # お届け先に「新しいお届け先」が選択されている場合は、view内の記述で格納済み
     @cart_items = CartItem.where(customer_id: current_customer.id)
@@ -53,7 +57,7 @@ class Public::OrdersController < ApplicationController
       # 注文完了ページへリダイレクト
       redirect_to orders_done_path
     else
-      render :confirm
+      render :new
     end
   end
 

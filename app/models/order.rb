@@ -3,8 +3,7 @@ class Order < ApplicationRecord
   has_many :order_detail, dependent: :destroy
   
   validates :postal_code, presence: true, format: { with: /\A\d{7}\z/, message: "は7桁の数字のみで入力してください（ハイフンなし）" }
-  validates :address, presence: true
-  validates :name, presence: true
+  validates :address, :name, presence: true
 
   enum status: {
     waiting_for_payment: 0,  # 入金待ち
@@ -20,5 +19,6 @@ class Order < ApplicationRecord
   def self.statuses_i18n
     statuses.keys.map { |key| [I18n.t("enums.order.status.#{key}"), key] }
   end
+
 end
 
