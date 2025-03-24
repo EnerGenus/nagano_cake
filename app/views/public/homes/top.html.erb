@@ -9,6 +9,7 @@
 <h2>新着商品</h2>
 <div class="d-flex flex-wrap">
   <% @items.each do |item| %>
+    <% if item.present? %>
     <div class="card m-2 p-1 card-hover">
       <%= link_to item_path(item.id) do %>
         <%= image_tag item.item_image, size: "150x150" %>
@@ -19,5 +20,6 @@
       </div>
     </div>
   <% end %>
+<% end %>
 </div>
 <div><%= link_to "全ての商品を見る＞", items_path %></div>
