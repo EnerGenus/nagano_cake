@@ -42,7 +42,6 @@ class Public::CartItemsController < ApplicationController
         flash[:notice] = "カートに追加しました"
         redirect_to cart_items_path
       else
-        flash[:notice] = "個数を選択してください"
         @item = Item.find(params[:cart_item][:item_id])
 
         render "public/items/show"
