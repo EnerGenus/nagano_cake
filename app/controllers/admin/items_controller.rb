@@ -34,7 +34,6 @@ class Admin::ItemsController < ApplicationController
       flash[:notice] = "変更が完了しました"
       redirect_to admin_item_path(@item)
     else
-      flash.now[:notice] = "予期せぬエラーが発生しました"
       render :edit
     end
   end

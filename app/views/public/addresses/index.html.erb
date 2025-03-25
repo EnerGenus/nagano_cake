@@ -4,15 +4,7 @@
   </div>
   <div class="row">
     <div class="col-md-11 mx-auto">
-      <% if @address.errors.any? %>
-        <div class="alert alert-danger">
-          <ul>
-            <% @address.errors.full_messages.each do |message| %>
-              <li><%= message %></li>
-            <% end %>
-          </ul>
-        </div>
-      <% end %>
+
       <%= render partial: 'address_form', locals: { address: @address, obj: "新規登録" } %>
     </div>
   </div>
