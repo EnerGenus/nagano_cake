@@ -33,6 +33,8 @@ ja:
         name: "宛名"
       customer:
         email: "メールアドレス"
+        password: "パスワード"
+        password_confirmation: "パスワード(確認)"
         family_name: "苗字(漢字)"
         first_name: "名前(漢字)"
         family_name_kana: "苗字(カナ)"
