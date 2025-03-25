@@ -1,3 +1,4 @@
+<%= render 'layouts/error_message', obj: @genre %>
 <h3>ジャンル編集</h3>
 
 <%= form_with model: @genre, url: admin_genre_path, method: :patch do |f| %>

@@ -48,6 +48,8 @@ ja:
         description: "商品説明"
         price: "価格"
         item_image: "商品画像"
+      genre:
+        name: "ジャンル名"
 
 
   date:
