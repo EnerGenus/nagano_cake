@@ -22,14 +22,25 @@ class Public::OrdersController < ApplicationController
       @order.name = current_customer.family_name + current_customer.first_name
     elsif params[:order][:address_option] == "1" 
       # address_option=1 つまり「お届け先」で「登録済住所から選択」を選択している時
-      @address = Address.find(params[:order][:address_id])
-      @order.postal_code = @address.postal_code
-      @order.address = @address.address
-      @order.name = @address.name
+      if params[:order][:address_id].present?
+        @address = Address.find_by(id: params[:order][:address_id])
+        if @address
+          @order.postal_code = @address.postal_code
+          @order.address = @address.address
+          @order.name = @address.name
+        end
+      else
+        flash[:notice] = "選択された住所が存在しません。"
+        redirect_to new_order_path and return
+      end
     elsif params[:order][:address_option] == "2"
-      @order.postal_code.blank? || @order.address.blank? || @order.name.blank?
-      flash.now[:notice] = "新しいお届け先の情報をすべて入力してください。"
-      render :new and return
+      if @order.postal_code.blank? || @order.address.blank? || @order.name.blank?
+        flash.now[:notice] = "新しいお届け先の情報をすべて入力してください。"
+        render :new and return
+      elsif @order.postal_code !~ /\A\d{7}\z/  # 7桁の数字のみ許可
+        flash.now[:notice] = "郵便番号は7桁の数字で入力してください。"
+        render :new and return
+      end
     end
     # お届け先に「新しいお届け先」が選択されている場合は、view内の記述で格納済み
     @cart_items = CartItem.where(customer_id: current_customer.id)
