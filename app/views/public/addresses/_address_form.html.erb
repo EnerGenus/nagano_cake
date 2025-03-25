@@ -1,3 +1,4 @@
+<%= render 'layouts/error_message', obj: @address %>
 <%= form_with model:address,local:true do |f| %>
   <div class="form-group">
     <%= f.label :"郵便番号(ハイフンなし)" %>

@@ -1,3 +1,4 @@
+<%= render 'layouts/error_message', obj: @item %>
 <h3>商品編集</h3>
 <%= form_with model: @item, url: admin_item_path, method: :patch do |f| %>
   <table>
