@@ -28,14 +28,14 @@
               </td>
               <td>
                 <% order.order_detail.each do |order_detail| %>
-                  <%= order_detail.item.name %>
+                  <%= order_detail.item.name %></br>
                 <% end %>
               </td>
               <td>
                 <%= order.total_payment %>円
               </td>
               <td>
-                <%= Order.statuses_i18n[Order.statuses[order.status]] %>
+                <%= t("enums.order.status.#{order.status}") %>
               </td>
               <td>
                 <%= link_to "表示する", order_path(order), class: "btn btn-primary" %>

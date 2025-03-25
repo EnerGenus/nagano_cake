@@ -22,7 +22,7 @@
         </tr>
         <tr>
           <th>ステータス</th>
-          <td><%= Order.statuses_i18n[Order.statuses[@order.status]] %></td>
+          <td><%= t("enums.order.status.#{@order.status}") %></td>
         </tr>
       </table>
     </div>

@@ -2,7 +2,7 @@ class Admin::CustomersController < ApplicationController
   before_action :authenticate_admin!
 
   def index
-  @customers = Customer.all
+    @customers = Customer.page(params[:page]).per(10)
   end
 
   def show
@@ -18,6 +18,7 @@ class Admin::CustomersController < ApplicationController
     if @customer.update(customer_params)
       redirect_to admin_customer_path(@customer),notice:"会員情報を更新しました"
     else
+      flash.now[:notice] = "項目を正しく記入してください"
       render :edit
     end
   end
