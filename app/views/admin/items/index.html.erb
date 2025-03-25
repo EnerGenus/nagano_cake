@@ -30,7 +30,7 @@
             <tr>
               <td class="align-middle"><%= item.id %></td>
               <td class="align-middle">
-                <%= link_to admin_item_path(item.id) do %>
+                <%= link_to admin_item_path(item.id), class: 'text-dark' do %>
                   <%= item.name %>
                 <% end %>
               </td>
@@ -40,7 +40,7 @@
                 <% if item.is_active %>
                   <p class="text-success font-weight-bold">販売中</p>
                 <% else %>
-                  <p class="text-secondary font-weight-bold">販売停止中</p>
+                  <p class="text-muted font-weight-bold">販売停止中</p>
                 <% end %>
               </td>
             </tr>
