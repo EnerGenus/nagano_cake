@@ -13,7 +13,6 @@ class Admin::GenresController < ApplicationController
       redirect_to admin_genres_path
     else
       @genres = Genre.all
-      flash.now[:notice] = "予期せぬエラーが発生しました"
       render :index
     end
   end
@@ -28,7 +27,6 @@ class Admin::GenresController < ApplicationController
       flash[:notice] = "ジャンルを変更しました"
       redirect_to admin_genres_path
     else
-      flash.now[:notice] = "予期せぬエラーが発生しました"
       render :edit
     end
   end

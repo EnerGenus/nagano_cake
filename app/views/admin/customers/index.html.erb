@@ -1,25 +1,32 @@
-<div class="container">
-  <div class="row">
-    <h2>会員一覧</h2>
-
-      <table class="table">
-        <thead>
-        <tr>
-          <th>会員ID</th>
-          <th>氏名</th>
-          <th>メールアドレス</th>
-          <th>ステータス</th>
-        </tr>
-      </thead>
-        <% @customers.each do |customer| %>
-          <tr>
-            <td><%= customer.id %></td>
-            <td><%= link_to "#{customer.family_name}#{customer.first_name}", admin_customer_path(customer) %></td>
-            <td><%= customer.email %></td>
-           <td class="<%= customer.is_active ? 'text-success font-weight-bold' : 'text-secondary font-weight-bold' %>"><%= customer.is_active ? '有効' : '退会' %></td>
-          </tr>
-        <% end %>
-      </table>
-      <%= paginate @customers %>
+<div class="container-fluid position-relative">
+  <div class="row align-items-center justify-content-center">
+    <div class="col-lg-10 col-md-8">
+      <h5 class="d-inline-block p-2 m-4" style="background-color: #E0E0E0; color: #333;">会員一覧</h5>  
+       <div class="row justify-content-center">
+        <div class="col-md-12 col-lg-8">
+          <table class="table">
+            <thead style="background-color: #E0E0E0; color: #333;">
+              <tr>
+                <th>会員ID</th>
+                <th>氏名</th>
+                <th>メールアドレス</th>
+                <th>ステータス</th>
+              </tr>
+            </thead>
+            <% @customers.each do |customer| %>
+              <tr>
+                <td><%= customer.id %></td>
+                <td><%= link_to "#{customer.family_name}#{customer.first_name}", admin_customer_path(customer), class: 'text-dark' %></td>
+                <td><%= customer.email %></td>
+                <td class="<%= customer.is_active ? 'text-success font-weight-bold' : 'text-muted font-weight-bold' %>">
+                                  <%= customer.is_active ? '有効' : '退会' %>
+                </td>
+              </tr>
+            <% end %>
+          </table>
+          <%= paginate @customers %>
+        </div>
+      </div>
     </div>
   </div>
+</div>
