@@ -67,7 +67,7 @@ class Public::OrdersController < ApplicationController
   
       # 注文完了ページへリダイレクト
       redirect_to orders_done_path
-    
+   
   end
 
   def done
