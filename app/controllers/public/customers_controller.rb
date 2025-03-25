@@ -14,6 +14,7 @@ class Public::CustomersController < ApplicationController
     if customer.update(customer_params)
       redirect_to customers_mypage_path,notice:"登録情報が更新されました"
     else
+      @customer = current_customer
       render :edit
     end
   end
