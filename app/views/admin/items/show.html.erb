@@ -5,35 +5,35 @@
 
       <div class="row d-flex align-items-left">
         <!-- 左側の画像 -->
-        <div class="col-md-4 text-left">
+        <div class="col-md-3 text-left">
         <%= image_tag @item.item_image, size: "300x300", class: "img-fluid rounded shadow-sm", alt: "商品画像" %>
         </div>
 
         <!-- 右側の商品情報 -->
-        <div class="col-md-8">
+        <div class="col-md-9">
           <table class="table-borderless">
             <tbody>
               <tr>
-                <th class="text-left text-top">商品名</th>
+                <td class="col-4 text-left text-top">商品名</td>
                 <td class="px-3 py-2"><%= @item.name %></td>
               </tr>
               <tr>
-                <th class="text-left text-top">商品説明</th>
+                <td class="col-4 text-left text-top">商品説明</td>
                 <td class="px-3 py-2"><%= @item.description %></td>
               </tr>
               <tr>
-                <th class="text-left text-top">ジャンル</th>
+                <td class="col-4 text-left text-top">ジャンル</td>
                 <td class="px-3 py-2"><%= @item.genre.name %></td>
               </tr>
               <tr>
-                <th class="text-left text-top">
+                <td class="col-4 text-left text-top">
                   税込価格<br>
                   <span class="text-muted">(税抜価格)</span>
-                </th>
+                </td>
                 <td class="px-3 py-2"><strong><%= @item.with_tax_price %></strong> 円 (<%= @item.price %> 円)</td>
               </tr>
               <tr>
-                <th class="text-left text-top">販売ステータス</th>
+                <td class="col-4 text-left text-top">販売ステータス</td>
                 <td class="px-3 py-2">
                   <% if @item.is_active %>
                     <span class="text-success font-weight-bold">販売中</span>
