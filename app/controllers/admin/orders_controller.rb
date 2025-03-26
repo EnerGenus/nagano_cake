@@ -4,6 +4,7 @@ class Admin::OrdersController < ApplicationController
   def show
     @order = Order.find(params[:id])
     @order_details = @order.order_detail
+    @customer_name = @order.customer.family_name + @order.customer.first_name
   end
 
   def update
