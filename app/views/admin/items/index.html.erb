@@ -1,12 +1,12 @@
 <div class="container-fluid position-relative">
   <div class="row align-items-center justify-content-between">
-    <div class="col-auto">
-      <h5 class="d-inline-block p-2 m-4" style="background-color: #E0E0E0; color: #333;">商品一覧</h5>
+    <div class="col-6">
+      <h5 class="d-inline-block p-2 ml-5 mt-4 mb-4" style="background-color: #E0E0E0; color: #333;">商品一覧</h5>
     </div>
 
     <!-- ＋ボタン -->
-    <div class="col-auto">
-      <%= link_to new_admin_item_path, class: "btn btn-outline-secondary m-4" do %>
+    <div class="text-right col-6">
+      <%= link_to new_admin_item_path, class: "btn btn-outline-secondary mr-5 mt-4 mb-4" do %>
         <i class="fa-solid fa-circle-plus"></i>
       <% end %>
     </div>

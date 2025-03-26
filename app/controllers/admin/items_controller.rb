@@ -3,6 +3,7 @@ class Admin::ItemsController < ApplicationController
 
   def new
     @item = Item.new
+    @btn_text = '新規登録'
   end
 
   def create
@@ -26,6 +27,7 @@ class Admin::ItemsController < ApplicationController
 
   def edit
     @item = Item.find(params[:id])
+    @btn_text = '変更を保存'
   end
 
   def update
