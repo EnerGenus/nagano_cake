@@ -1,16 +1,13 @@
 <div class="container">
-  <div class="row">
-    <h3 class="col-md-11">配送先登録 / 一覧</h3>
+  <div class="row my-3">
+    <h3 class="d-inline-block p-2 m-4", style="background-color: #e0e0e0; color: #333;">配送先登録 / 一覧</h3>
   </div>
-  <div class="row">
-    <div class="col-md-11 mx-auto">
-
+  <div>
       <%= render partial: 'address_form', locals: { address: @address, obj: "新規登録" } %>
-    </div>
   </div>
-  <div class="row">
-    <table class="table table-bordered">
-      <thead>
+  <div class = "row justify-content-start">
+    <table class="table table-bordered col-lg-10" >
+      <thead style="background-color: #E0E0E0; color: #333;">
         <tr>
           <th>郵便番号</th>
           <th>住所</th>
@@ -20,15 +17,17 @@
       </thead>
       <tbody>
         <% @addresses.each do |address| %>
-          <tr>
-            <td><%= address.postal_code %></td>
-            <td><%= address.address %></td>
-            <td><%= address.name %></td>
-            <td>
-              <%= link_to "編集する", edit_address_path(address), class: "btn btn-success" %>
-              <%= link_to "削除する", address, method: :delete, data: { confirm: "本当に削除しますか？" }, class: "btn btn-danger" %>
-            </td>
-          </tr>
+            <tr>
+              <td><%= address.postal_code %></td>
+              <td><%= address.address %></td>
+              <td style="white-space: nowrap;"><%= address.name %></td>
+              <td>
+                <div class="d-flex justify-content-center flex-nowrap">
+                  <%= link_to "編集する", edit_address_path(address), class: "btn btn-success", style: "white-space: nowrap;" %>
+                  <%= link_to "削除する", address, method: :delete, data: { confirm: "本当に削除しますか？" }, class: "btn btn-danger", style: "white-space: nowrap;" %>
+              </div>
+              </td>
+            </tr>
         <% end %>
       </tbody>
     </table>
