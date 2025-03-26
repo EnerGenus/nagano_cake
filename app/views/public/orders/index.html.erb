@@ -1,10 +1,10 @@
 <div class="container">
-  <div class="row">
-    <h3 class="col-md-11">注文履歴一覧</h3>
+  <div class="row my-3">
+    <h3 class="d-inline-block p-2 m-4", style="background-color: #e0e0e0; color: #333;">注文履歴一覧</h3>
   </div>
   <div class="row">
-    <table class="table">
-      <thead>
+    <table class="table table-bordered">
+      <thead style="background-color: #f1f1f1; color: #333;">
         <tr>
           <th>注文日</th>
           <th>配送先</th>
@@ -18,26 +18,26 @@
         <% if @orders.present? %>
           <% @orders.each do |order| %>
             <tr>
-              <td>
+              <td class="align-middle">
                 <%= order.created_at.strftime("%Y/%m/%d") %>
               </td>
-              <td>
+              <td class="align-middle">
                 〒<%= order.postal_code %><br>
                 <%= order.address %><br>
                 <%= order.name %>
               </td>
-              <td>
+              <td class="align-middle">
                 <% order.order_detail.each do |order_detail| %>
                   <%= order_detail.item.name %></br>
                 <% end %>
               </td>
-              <td>
+              <td class="align-middle">
                 <%= order.total_payment %>円
               </td>
-              <td>
+              <td class="align-middle">
                 <%= t("enums.order.status.#{order.status}") %>
               </td>
-              <td>
+              <td class="align-middle">
                 <%= link_to "表示する", order_path(order), class: "btn btn-primary" %>
               </td>
             </tr>

@@ -1,10 +1,11 @@
 <div class="container">
-  <div class="row">
-    <h3 class="col-md-11">注文情報確認
-    </h3>
+  <div class="row my-3">
+    <div class="col-sm-8 px-sm-0 offset-sm-1">
+      <h3 class="d-inline-block p-2 m-4", style="background-color: #e0e0e0; color: #333;">注文情報確認</h3>
+    </div>
   </div>
   <div class="row">
-    <table class="table table-bordered col-md-2"> 
+    <table class="table table-bordered col-md-7"> 
       <thead>
         <tr>
           <th class="table-active" style="width:50%">商品名</th>
@@ -17,8 +18,8 @@
         <% @total = 0 %>
         <% @cart_items.each do |cart_item| %>
           <tr>
-            <td>
-              <%= image_tag cart_item.item.item_image, size: "50x50" %>
+            <td class="p-1">
+              <%= image_tag cart_item.item.item_image, size: "40x40" %>
               <%= cart_item.item.name %>
             </td>
             <td><%= cart_item.item.with_tax_price %></td>
@@ -31,7 +32,7 @@
         <% end %>
       </tbody>
     </table>
-    <table class="table table-bordered col-md-4">
+    <table class="table table-bordered col-md-3 offset-sm-2 mb-auto">
       <tr>
         <th class="table-active" style="width:50%">送料</th>
         <td>800</td>
@@ -47,15 +48,17 @@
     </table>
   </div>
   <div class="row">
-    <p><strong>支払方法</strong></p>
-    <p><%= t("enums.order.payment_method.#{@order.payment_method}") %></p>
+    <p class="col-lg-1"><strong>支払方法</strong></p>
+    <p class="col-lg-3"><%= t("enums.order.payment_method.#{@order.payment_method}") %></p>
   </div>
   <div class="row">
-    <p><strong>お届け先</strong></p>
-    <p>〒<%= @order.postal_code %> <%= @order.address %></p><br>
-    <p><%= @order.name %></p>
+    <p class="col-lg-1"><strong>お届け先</strong></p>
+    <div class="col-lg-3">
+      <p class="mb-0">〒<%= @order.postal_code %> <%= @order.address %></p>
+      <p><%= @order.name %></p>
+    </div>
   </div>
-  <div class="row">
+  <div class="row justify-content-center">
     <%= form_with model: @order, url: orders_path, method: :post, local: true, scope: :order do |f| %>
       <%= f.hidden_field :payment_method, value: @order.payment_method %>
       <%= f.hidden_field :postal_code, value: @order.postal_code %>
@@ -66,7 +69,7 @@
       <%= f.hidden_field :total_payment, value: @order.total_payment %>
       <%= f.hidden_field :status, value: 0 %>
       <%= f.hidden_field :customer_id, value: current_customer.id %>
-      <%= f.submit "注文を確定する", class: "btn btn-primary" %>
+      <%= f.submit "注文を確定する", class: "btn btn-success" %>
     <% end %>
   </div>
 </div>

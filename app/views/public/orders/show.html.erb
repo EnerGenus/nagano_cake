@@ -1,27 +1,27 @@
 <div class="container">
-  <div class="row">
-    <h3 class="col-md-11">注文履歴詳細</h3>
+  <div class="row my-3">
+    <h3 class="d-inline-block p-2 m-4", style="background-color: #e0e0e0; color: #333;">注文履歴詳細</h3>
   </div>
   <div class="row">
     <div class="col-md-7">
       <h4><strong>注文情報</strong></h4>
-      <table class="table table-bordered">
+      <table class="table table-bordered border-dark">
         <tr>
-          <th>注文日</th>
+          <th style="background-color: #f1f1f1; color: #333;">注文日</th>
           <td><%= @order.created_at.strftime("%Y/%m/%d") %></td>
         </tr>
         <tr>
-          <th>配送先</th>
+          <th style="background-color: #f1f1f1; color: #333;">配送先</th>
           <td>〒<%= @order.postal_code %><br>
               <%= @order.address %><br>
               <%= @order.name %></td>
         </tr>
         <tr>
-          <th>支払方法</th>
+          <th style="background-color: #f1f1f1; color: #333;">支払方法</th>
           <td><%= Order.payment_methods_i18n[@order.payment_method] %></td>
         </tr>
         <tr>
-          <th>ステータス</th>
+          <th style="background-color: #f1f1f1; color: #333;">ステータス</th>
           <td><%= t("enums.order.status.#{@order.status}") %></td>
         </tr>
       </table>
@@ -30,41 +30,43 @@
       <h4><strong>請求情報</strong></h4>
       <table class="table table-bordered">
         <tr>
-          <th>商品合計</th>
+          <th style="background-color: #f1f1f1; color: #333;">商品合計</th>
           <td><%= @order.total_payment - @order.shipping_cost %></td>
         </tr>
         <tr>
-          <th>配送料</th>
+          <th style="background-color: #f1f1f1; color: #333;">配送料</th>
           <td><%= @order.shipping_cost %></td>
         </tr>
         <tr>
-          <th><strong>ご請求額</strong></th>
+          <th style="background-color: #f1f1f1; color: #333;"><strong>ご請求額</strong></th>
           <td><%= @order.total_payment %></td>
         </tr>
       </table>
     </div>
   </div>
   <div class="row">
-    <h4><strong>注文内容</strong></h4>
-    <table class="table table-bordered">
-        <thead>
-          <tr>
-            <th>商品</th>
-            <th>単価(税込)</th>
-            <th>個数</th>
-            <th>小計</th>
-          </tr>
-        </thead>
-        <tbody>
-          <% @order.order_detail.each do |order_detail| %>
+    <div class=" col-lg-10">
+      <h4><strong>注文内容</strong></h4>
+      <table class="table table-bordered">
+          <thead style="background-color: #f1f1f1; color: #333;">
             <tr>
-              <td><%= order_detail.item.name %></td>
-              <td><%= order_detail.price_including_tax.to_i %></td>
-              <td><%= order_detail.amount_ordered %></td>
-              <td><%= order_detail.subtotal %></td>
+              <th>商品</th>
+              <th>単価(税込)</th>
+              <th>個数</th>
+              <th>小計</th>
             </tr>
-          <% end %>
-        </tbody>
-    </table>
+          </thead>
+          <tbody>
+            <% @order.order_detail.each do |order_detail| %>
+              <tr>
+                <td><%= order_detail.item.name %></td>
+                <td><%= order_detail.price_including_tax.to_i %></td>
+                <td><%= order_detail.amount_ordered %></td>
+                <td><%= order_detail.subtotal %></td>
+              </tr>
+            <% end %>
+          </tbody>
+      </table>
+    </div>
   </div>
 </div>
