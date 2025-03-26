@@ -1,6 +1,6 @@
 <div class=" container">
   <div class="row">
-    <div class="col-lg-2">
+    <div class="col-lg-4">
       <h5 class="d-inline-block p-2 m-4", style="background-color: #e0e0e0; color: #333;">会員情報編集</h5>
     </div>
   </div>
@@ -11,48 +11,55 @@
         <%= render "public/shared/error_messages", resource: @customer %>
         <table>
           <tr>
-            <th>氏名</th>
-            <td>
-              <%= f.text_field :family_name, autofocus: true,autocomplete:"family_name", placeholder: "山田" %>
-              <%= f.text_field :first_name, autofocus: true, autocomplete: "first_name", placeholder: "花子" %>
+            <th class="pb-2">氏名</th>
+            <td class="pb-2 pl-5">
+              <%= f.text_field :family_name, autofocus: true,autocomplete:"family_name", placeholder: "山田", class: "form-control rounded" %>
+            </td>
+            <td class="pb-2 pl-5">
+              <%= f.text_field :first_name, autofocus: true, autocomplete: "first_name", placeholder: "花子", class: "form-control rounded" %>
             </td>
           </tr>
           <tr>
-            <th>フリガナ</th>
-            <td>
-              <%= f.text_field :family_name_kana, autofocus: true, autocomplete: "family_name_kana",  placeholder: "ヤマダ" %>
-              <%= f.text_field :first_name_kana, autofocus: true, autocomplete: "first_name_kana", placeholder: "ハナコ" %>
+            <th class="pb-2">フリガナ</th>
+            <td class="pb-2 pl-5">
+              <%= f.text_field :family_name_kana, autofocus: true, autocomplete: "family_name_kana",  placeholder: "ヤマダ", class: "form-control rounded" %>
+            </td>
+            <td class="pb-2 pl-5">
+              <%= f.text_field :first_name_kana, autofocus: true, autocomplete: "first_name_kana", placeholder: "ハナコ", class: "form-control rounded" %>
             </td>
           </tr>
           <tr>
-            <th>郵便番号</th>
-            <td>
-              <%= f.text_field :postal_code, autofocus: true, autocomplete: "postal_code", placeholder: "0000000" %>
+            <th class="pb-2">郵便番号</th>
+            <td class="pb-2 pl-5">
+              <%= f.text_field :postal_code, autofocus: true, autocomplete: "postal_code", placeholder: "0000000", class: "form-control rounded" %>
             </td>
           </tr>
           <tr>
-            <th>住所</th>
-            <td>
-              <%= f.text_field :address, autofocus: true, autocomplete: "address", placeholder: "Ａ県Ｂ市Ｃ町１－２－３" %>
+            <th class="pb-2">住所</th>
+            <td class="pb-2 pl-5" colspan="3">
+              <%= f.text_field :address, autofocus: true, autocomplete: "address", placeholder: "Ａ県Ｂ市Ｃ町１－２－３", style: "width: 150%;", class: "form-control rounded" %>
             </td>
           </tr>
           <tr>
-            <th>電話番号</th>
-            <td>
-              <%= f.text_field :phone_number, autofocus: true, autocomplete: "phone_number", placeholder: "01023456789" %>
+            <th class="pb-2">電話番号</th>
+            <td class="pb-2 pl-5">
+              <%= f.text_field :phone_number, autofocus: true, autocomplete: "phone_number", placeholder: "01023456789", class: "form-control rounded" %>
             </td>
           </tr>
           <tr>
-            <th>メールアドレス</th>
-            <td>
-              <%= f.email_field :email, autofocus: true, autocomplete: "email", placeholder: "sample@example.com" %>
+            <th class="pb-2">メールアドレス</th>
+            <td class="pb-2 pl-5">
+              <%= f.email_field :email, autofocus: true, autocomplete: "email", placeholder: "sample@example.com", class: "form-control rounded" %>
             </td>
           </tr>
           <tr>
-            <th>
-              <%= f.submit "編集内容を保存", class: "btn btn-success" %>
-              <%= link_to "退会する", unsubscribe_path, class:"btn btn-danger my-4 offset-sm-1"  %>
-            </th>
+            <th></th>
+            <td class="pl-5">
+              <%= f.submit "編集内容を保存", class: "btn btn-success my-4 w-100" %>
+            </td>
+            <td class="pr-0">
+              <%= link_to "退会する", unsubscribe_path, class: "btn btn-danger my-4 offset-5" %>
+            </td>
           </tr>
         </table>
       <% end %>

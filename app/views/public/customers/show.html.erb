@@ -1,66 +1,66 @@
 <div class="container">
   <div class="row my-3">
-    <div class="col-sm-8 px-sm-0 offset-sm-1">
-      <h3 class="d-inline-block p-2 m-4", style="background-color: #e0e0e0; color: #333;">マイページ</h3>
+    <div class="col-md-11 px-sm-0 offset-sm-2">
+      <h5 class="d-inline-block p-2 m-4", style="background-color: #e0e0e0; color: #333;">マイページ</h5>
     </div>
   </div>
-  <div class="row mb-1">
-    <div class="col-sm-3 px-sm-0 offset-sm-1">
+  <div class="row py-2">
+    <div class="px-sm-0">
       <b>登録情報</b>
     </div>
-    <div class="col-sm-4 px-sm-0">
-      <%= link_to "編集する", customers_information_edit_path, class: "btn btn-success" %>
+    <div style="padding-left:80px;">
+      <%= link_to "編集する", customers_information_edit_path, class: "btn btn-success w-100" %>
     </div>
   </div>
-  <div class="row">
-    <div class="col-sm-6 px-sm-0 offset-sm-1">
-      <table class="table table-bordered">
+  <div class="row py-2">
+    <div class="col-sm-10 px-sm-0">
+      <table class="table table-bordered w-100">
         <tr>
-          <td>氏名</td>
+          <td class="table-active" style="width:30%">氏名</td>
           <td><%= @customer.family_name %><%= @customer.first_name %></td>
         </tr>
 
         <tr>
-          <td>カナ</td>
+          <td class="table-active" style="width:30%">カナ</td>
           <td><%= @customer.family_name_kana %><%= @customer.first_name_kana %></td>
         </tr>
 
         <tr>
-          <td>郵便番号</td>
+          <td class="table-active" style="width:30%">郵便番号</td>
           <td><%= @customer.postal_code %></td>
         </tr>
 
         <tr>
-          <td>住所</td>
+          <td class="table-active" style="width:30%">住所</td>
           <td><%= @customer.address %></td>
         </tr>
 
         <tr>
-          <td>電話番号</td>
+          <td class="table-active" style="width:30%">電話番号</td>
           <td><%= @customer.phone_number %></td>
         </tr>
 
         <tr>
-          <td>メールアドレス</td>
+          <td class="table-active" style="width:30%">メールアドレス</td>
           <td><%= @customer.email %></td>
         </tr>
       </table>
     </div>
   </div>
-  <div class="row mb-1">
-    <div class="col-sm-3 px-sm-0 offset-sm-1">
+  <div class="row py-2">
+    <div class="px-sm-0">
       <b>配送先</b>
     </div>
-    <div class="col-sm-3 px-sm-0">
-      <%= link_to "一覧を見る", addresses_path, class: "btn btn-primary" %>
+    <div style="padding-left:95px;">
+      <%= link_to "一覧を見る", addresses_path, class: "btn btn-primary", style: "width: 150%;" %>
     </div>
   </div>
-  <div class="row">
-    <div class="col-sm-3 px-sm-0 offset-sm-1">
+  <div class="row py-2">
+    <div class="px-sm-0">
       <b>注文履歴</b>
     </div>
-    <div class="col-sm-3 px-sm-0">
-      <%= link_to "一覧を見る", orders_path, class: "btn btn-primary" %>
+    <div style="padding-left:80px;">
+      <%= link_to "一覧を見る", orders_path, class: "btn btn-primary", style: "width: 150%;" %>
     </div>
   </div>
 </div>
