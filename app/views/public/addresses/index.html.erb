@@ -9,7 +9,7 @@
     <table class="table table-bordered col-lg-10" >
       <thead style="background-color: #E0E0E0; color: #333;">
         <tr>
-          <th>郵便番号</th>
+          <th style="white-space: nowrap;">郵便番号</th>
           <th>住所</th>
           <th>宛名</th>
           <th></th>
@@ -18,7 +18,7 @@
       <tbody>
         <% @addresses.each do |address| %>
             <tr>
-              <td><%= address.postal_code %></td>
+              <td style="white-space: nowrap;"><%= address.postal_code %></td>
               <td><%= address.address %></td>
               <td style="white-space: nowrap;"><%= address.name %></td>
               <td>
