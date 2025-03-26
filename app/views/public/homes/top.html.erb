@@ -7,24 +7,26 @@
       購入には会員登録が必要になります。
     </p>
   </div>
-
-  <div>
-    <h2>新着商品</h2>
-    <div class="d-flex flex-wrap justify-content-start">
-      <% @items.each do |item| %>
-        <% if item.present? %>
-          <div class="card m-2 p-1 card-hover">
-            <%= link_to item_path(item.id) do %>
-              <%= image_tag item.item_image, size: "150x150" %>
-            <% end %>
-            <div class="card-body text-body">
-              <p class="card-title"><%= item.name %></p>
-              <p class="card-text">¥ <%= item.with_tax_price %></p>
+  <div class="row justify-content-center">
+    <div class="col-xxl-10">
+      <h2>新着商品</h2>
+      <div class="d-flex flex-wrap">
+        <% @items.each do |item| %>
+          <% if item.present? %>
+            <div class="card m-2 p-1 card-hover">
+              <%= link_to item_path(item.id) do %>
+                <%= image_tag item.item_image, size: "150x150" %>
+              <% end %>
+              <div class="card-body text-body">
+                <p class="card-title"><%= item.name %></p>
+                <p class="card-text">¥ <%= item.with_tax_price %></p>
+              </div>
             </div>
-          </div>
+          <% end %>
         <% end %>
-      <% end %>
+      </div>
+      <div class = "row pr-5 justify-content-end"><%= link_to "全ての商品を見る＞", items_path %></div>
     </div>
   </div>
-  <div class = "row pr-5 justify-content-end"><%= link_to "全ての商品を見る＞", items_path %></div>
+  
 </div>
