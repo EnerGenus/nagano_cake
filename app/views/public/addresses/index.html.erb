@@ -5,8 +5,8 @@
   <div>
       <%= render partial: 'address_form', locals: { address: @address, obj: "新規登録" } %>
   </div>
-  <div>
-    <table class="table table-bordered">
+  <div class = "row justify-content-start">
+    <table class="table table-bordered col-lg-10" >
       <thead style="background-color: #E0E0E0; color: #333;">
         <tr>
           <th>郵便番号</th>
@@ -20,10 +20,12 @@
             <tr>
               <td><%= address.postal_code %></td>
               <td><%= address.address %></td>
-              <td><%= address.name %></td>
+              <td style="white-space: nowrap;"><%= address.name %></td>
               <td>
-                <%= link_to "編集する", edit_address_path(address), class: "btn btn-success" %>
-                <%= link_to "削除する", address, method: :delete, data: { confirm: "本当に削除しますか？" }, class: "btn btn-danger" %>
+                <div class="d-flex justify-content-center flex-nowrap">
+                  <%= link_to "編集する", edit_address_path(address), class: "btn btn-success", style: "white-space: nowrap;" %>
+                  <%= link_to "削除する", address, method: :delete, data: { confirm: "本当に削除しますか？" }, class: "btn btn-danger", style: "white-space: nowrap;" %>
+              </div>
               </td>
             </tr>
         <% end %>
