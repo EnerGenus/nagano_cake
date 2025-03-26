@@ -4,6 +4,7 @@ class Admin::GenresController < ApplicationController
   def index
     @genre = Genre.new
     @genres = Genre.all
+    @btn_text = "新規登録"
   end
 
   def create
@@ -19,6 +20,7 @@ class Admin::GenresController < ApplicationController
 
   def edit
     @genre = Genre.find(params[:id])
+    @btn_text = "変更を保存"
   end
 
   def update
