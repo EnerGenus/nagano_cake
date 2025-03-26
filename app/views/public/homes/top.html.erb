@@ -1,25 +1,30 @@
+<div class="container justify-content-center">
+  <div class="row pt-3 justify-content-center">
+    <p>
+      ようこそ、ながのCAKEへ！</br>
+      このサイトは、ケーキ販売のECサイトになります。</br>
+      会員でない方も商品の閲覧はできますが、</br>
+      購入には会員登録が必要になります。
+    </p>
+  </div>
 
-<p>
-  ようこそ、ながのCAKEへ！</br>
-  このサイトは、ケーキ販売のECサイトになります。</br>
-  会員でない方も商品の閲覧はできますが、</br>
-  購入には会員登録が必要になります。
-</p>
-
-<h2>新着商品</h2>
-<div class="d-flex flex-wrap">
-  <% @items.each do |item| %>
-    <% if item.present? %>
-    <div class="card m-2 p-1 card-hover">
-      <%= link_to item_path(item.id) do %>
-        <%= image_tag item.item_image, size: "150x150" %>
+  <div>
+    <h2>新着商品</h2>
+    <div class="d-flex flex-wrap justify-content-start">
+      <% @items.each do |item| %>
+        <% if item.present? %>
+          <div class="card m-2 p-1 card-hover">
+            <%= link_to item_path(item.id) do %>
+              <%= image_tag item.item_image, size: "150x150" %>
+            <% end %>
+            <div class="card-body text-body">
+              <p class="card-title"><%= item.name %></p>
+              <p class="card-text">¥ <%= item.with_tax_price %></p>
+            </div>
+          </div>
+        <% end %>
       <% end %>
-      <div class="card-body text-body">
-        <h5 class="card-title"><%= item.name %></h5>
-        <p class="card-text">¥ <%= item.with_tax_price %></p>
-      </div>
     </div>
-  <% end %>
-<% end %>
+  </div>
+  <div class = "row pr-5 justify-content-end"><%= link_to "全ての商品を見る＞", items_path %></div>
 </div>
-<div><%= link_to "全ての商品を見る＞", items_path %></div>
