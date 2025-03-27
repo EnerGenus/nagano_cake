@@ -1,0 +1,7 @@
+ja:
+  views:
+    pagination:
+      next: "Next>"
+      last: "Last>>"
+      previous: "<Prev"
+      first: "<<First"
