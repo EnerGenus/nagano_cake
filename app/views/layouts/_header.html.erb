@@ -4,11 +4,11 @@
     <div class="container-fluid">
 
       <a class="navbar-brand" href="/"><span>LOGO(仮）</span></a>
-        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavDropdown" aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
-          <span class="navbar-toggler-icon"></span>
-        </button>
+      <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavDropdown" aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+      </button>
 
-        <div class="collapse navbar-collapse justify-content-lg-end" id="navbarNavDropdown">
+      <div class=" row collapse navbar-collapse justify-content-lg-end" id="navbarNavDropdown">
         <ul class="navbar-nav d-flex flex-lg-row flex-wrap">
           <% if admin_signed_in? %>
             <li>
@@ -80,5 +80,22 @@
           <% end %>
         </ul>
       </div>
+      <div class= "row">
+        <div class="col-12  d-flex justify-content-center">
+          <%= form_with url: search_path, method: :get, local: true do |f| %>
+            <%= f.text_field :query, required: true %>
+      
+            <% if admin_signed_in? %>
+              <%= f.select :search_type, [['会員', 'Customer'], ['商品', 'Item']] %>
+            <% else %>
+              <%= f.hidden_field :search_type, value: 'Item' %>
+            <% end %>
+      
+            <%= f.select :match_type, [['完全一致', 'perfect'], ['前方一致', 'forward'], ['後方一致', 'backward'], ['部分一致', 'partial']] %>
+            <%= f.submit "検索" %>
+          <% end %>
+        </div>
+      </div>
+    </div>
   </nav>
 </header>
