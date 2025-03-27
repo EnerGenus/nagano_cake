@@ -19,4 +19,13 @@ class Customer < ApplicationRecord
   def active_for_authentication?
     super && (is_active == true)
   end
+
+  # 検索機能のためのメソッド
+  scope :search_by_fullname, ->(query, match_type) {
+    case match_type
+    when 'partial' then where("CONCAT(family_name, first_name) LIKE ?", "%#{query}%")
+    else all
+    end
+  }
+
 end
