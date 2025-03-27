@@ -1,17 +1,23 @@
 <%= render 'layouts/error_message', obj: @cart_item %>
-<div>
-  <%= image_tag @item.item_image, size: "300x300" %>
-</div>
-<div>
-  <h2><strong><%= @item.name %></strong></h2>
-  <p><%= @item.description %></p>
-  <p>¥ <%= @item.with_tax_price %>円(税込）</p>
-  <% if customer_signed_in? %>
-    <%= form_with model: @cart_item, url: cart_items_path, method: :post do |f| %>
-      <%= f.hidden_field :item_id, value: @item.id  %>
-      <%= f.select :amount, *[1..10], include_blank: "個数選択" %>
-      <%= f.submit "カートに入れる", class: 'btn btn-success'%>
-    <% end %>
-  <% end %>
-
+<div class="container-fluid position-relative">
+  <div class="row d-flex flex-wrap">
+    <div class="col-12 col-md-4 text-center" style="padding: 50px;">
+      <%= image_tag @item.item_image,  width: 400, height: 280, class: "img-resize, rounded d-block", style: "object-fit: cover; max-width: 100%;" %>
+    </div>
+    <div class="col-12 col-md-8" style="padding-top: 50px;">
+      <h3><strong><%= @item.name %></strong></h3>
+      <h5 class="py-3"><%= @item.description %></h5>
+      <div class="d-flex align-items-end py-4">
+        <h3 class="mb-0">¥ <%= @item.with_tax_price.to_s(:delimited) %></h3>
+        <p class="mb-0 ms-2">(税込）</p>
+      </div>
+        <% if customer_signed_in? %>
+        <%= form_with model: @cart_item, url: cart_items_path, method: :post do |f| %>
+          <%= f.hidden_field :item_id, value: @item.id  %>
+          <%= f.select :amount, *[1..10].to_a, include_blank: "個数選択" %>
+          <%= f.submit "カートに入れる", class: 'btn btn-success'%>
+        <% end %>
+      <% end %>
+    </div>
+  </div>
 </div>
