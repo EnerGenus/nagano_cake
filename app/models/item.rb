@@ -14,11 +14,8 @@ class Item < ApplicationRecord
   end
 
   # 検索機能のためのメソッド
-  scope :search_by_title, ->(query, match_type) {
+  scope :search_by_name, ->(query, match_type) {
     case match_type
-    when 'perfect' then where(name: query)
-    when 'forward' then where('name LIKE ?', "#{query}%")
-    when 'backward' then where('name LIKE ?', "%#{query}")
     when 'partial' then where('name LIKE ?', "%#{query}%")
     else all
     end

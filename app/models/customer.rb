@@ -23,9 +23,6 @@ class Customer < ApplicationRecord
   # 検索機能のためのメソッド
   scope :search_by_fullname, ->(query, match_type) {
     case match_type
-    when 'perfect' then where("CONCAT(family_name, first_name) = ?", query)
-    when 'forward' then where("CONCAT(family_name, first_name) LIKE ?", "#{query}%")
-    when 'backward' then where("CONCAT(family_name, first_name) LIKE ?", "%#{query}")
     when 'partial' then where("CONCAT(family_name, first_name) LIKE ?", "%#{query}%")
     else all
     end

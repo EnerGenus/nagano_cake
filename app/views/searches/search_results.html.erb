@@ -24,8 +24,8 @@
                 <th>ステータス</th>
               </tr>
             </thead>
-            <% @results.each do |result| %>
-              <tbody>
+            <tbody>
+              <% @results.each do |result| %>
                 <tr>
                   <td>
                     <%= result.id %>
@@ -40,10 +40,10 @@
                     <%= result.is_active ? '有効' : '退会' %>
                   </td>
                 </tr>
-              </tbody>
-            <% end %>
+              <% end %>
+            </tbody>
           <!-- 商品についての検索結果 -->
-          <% else @search_type == 'Item' %>
+          <% elsif @search_type == 'Item' %>
             <!-- 管理者ログイン時 -->
             <% if admin_signed_in? %>
               <thead style="background-color: #f1f1f1; color: #333;">
@@ -55,45 +55,59 @@
                   <th>ステータス</th>
                 </tr>
               </thead>
-              <% @results.each do |result| %>
-                <tbody>
+              <tbody>
+                <% @results.each do |result| %>
                   <tr>
-                    <td class="align-middle"><%= item.id %></td>
                     <td class="align-middle">
-                      <%= link_to admin_item_path(item.id), class: 'text-dark' do %>
-                        <%= item.name %>
+                      <%= result.id %>
+                    </td>
+                    <td class="align-middle">
+                      <%= link_to admin_item_path(result.id), class: 'text-dark' do %>
+                        <%= result.name %>
                       <% end %>
                     </td>
-                    <td class="align-middle"><%= item.price %></td>
-                    <td class="align-middle"><%= item.genre.name %></td>
                     <td class="align-middle">
-                      <% if item.is_active %>
+                      <%= result.price %>
+                    </td>
+                    <td class="align-middle">
+                      <%= result.genre.name %>
+                    </td>
+                    <td class="align-middle">
+                      <% if result.is_active %>
                         <p class="text-success font-weight-bold">販売中</p>
                       <% else %>
                         <p class="text-muted font-weight-bold">販売停止中</p>
                       <% end %>
                     </td>
                   </tr>
-                </tbody>
-              <% end %>
+                <% end %>
+              </tbody>
             <!-- 会員ログインまたは未ログイン時 -->
             <% else %>
               <thead style="background-color: #f1f1f1; color: #333;">
                 <tr>
-                  <th></th>
-                  <th>Title</th>
-                  <th>Opinion</th>
+                  <th>商品名</th>
+                  <th>商品説明</th>
+                  <th>税込価格</th>
                 </tr>
               </thead>
-              <% @results.each do |result| %>
-                <tbody>
+              <tbody>
+                <% @results.each do |result| %>
                   <tr>
-                    <td><%= image_tag result.user.get_profile_image, size: '50x50' %></td>
-                    <td><%= link_to result.title, book_path(result) %></td>
-                    <td><%= result.body %></td>
+                    <td style="white-space: nowrap;">
+                      <%= image_tag result.item_image, size: "40x40" %>
+                      <%= link_to result.name, item_path(result.id) %>
+                    </td>
+                    <td>
+                      <%= result.description %>
+                    </td>
+                    <td>
+                      <%= result.with_tax_price.to_s(:delimited) %>
+                    </td>
                   </tr>
-                </tbody>
-              <% end %></thead>
+                <% end %>
+              </tbody>
+            <% end %>
           <% end %>
         </table>
       <% else %>

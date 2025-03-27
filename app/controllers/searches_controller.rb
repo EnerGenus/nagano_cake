@@ -3,7 +3,7 @@ class SearchesController < ApplicationController
   def search
     @query = params[:query]
     @search_type = params[:search_type]  # 会員検索 or 商品検索
-    @match_type = params[:match_type]    # 完全一致, 前方一致, 後方一致, 部分一致
+    @match_type = params[:match_type]    # 部分一致
 
     if @search_type == 'Customer'
       @results = Customer.search_by_fullname(@query, @match_type)
