@@ -79,9 +79,9 @@
         <% @order_details.each do |order_detail| %>
           <tr>
             <td><%= order_detail.item.name %></td>
-            <td><%= (order_detail.item.price * 1.1).to_i %></td>
+            <td><%= (order_detail.item.price * 1.1).to_i.to_s(:delimited) %></td>
             <td><%= order_detail.amount_ordered %></td>
-            <td><%= (order_detail.item.price * 1.1 * order_detail.amount_ordered).to_i %></td>
+            <td><%= (order_detail.item.price * 1.1 * order_detail.amount_ordered).to_i.to_s(:delimited) %></td>
             <%= form_with model: order_detail, url: admin_order_detail_path(order_detail), method: :patch, local: true do |f| %>
             <td>
               <div class="d-flex">
@@ -104,7 +104,7 @@
           <strong>商品合計</strong>
         </div>
         <div class="col-6">
-          <%= @order.total_payment %>円
+          <%= @order.total_payment.to_s(:delimited) %>円
         </div>
       </div>
       <div class="row">
@@ -120,7 +120,7 @@
           <strong>請求金額合計</strong>
         </div>
         <div class="col-6">
-          <strong><%= @order.total_payment + @order.shipping_cost %>円</strong>
+          <strong><%= (@order.total_payment + @order.shipping_cost).to_s(:delimited) %>円</strong>
         </div>
       </div>
     </div>

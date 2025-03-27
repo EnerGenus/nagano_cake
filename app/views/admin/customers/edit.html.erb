@@ -1,82 +1,85 @@
-<div class="container mt-5">
-  <h2 class="mb-4"><%= @customer.family_name %> <%= @customer.first_name %>さんの会員情報編集</h2>
-  <%= render 'layouts/error_message', obj: @customer %>
-  <%= form_with model: @customer, url: admin_customer_path(@customer), method: :patch, local: true do |f| %>
-    <% render "public/shared/error_messages", resource: @customer %>
+<%= render 'layouts/error_message', obj: @customer %>
 
-     <div class="row">
-          <label class="col-lg-3">名前</label>
-          <div class="col-lg-3">
-            <%= f.text_field :family_name,autoforcus: true, autocomplete: "family_name",  placeholder: "山田" %>
-          </div>
-          <div class="col-lg-3">
-            <%= f.text_field :first_name,autoforcus: true, autocomplete: "first_name",  placeholder: "花子" %>
-          </div>
-        </div><br>
+<div class="container-fluid position-relative">
+  <div class="row justify-content-center">
+    <div class="col-lg-10 col-md-8">
+      <h5 class="d-inline-block px-4 m-4" style="background-color: #E0E0E0; color: #333;"><%= @customer.family_name %> <%= @customer.first_name %>さんの会員情報編集</h5>
 
-      <div class="row">
-        <label class="col-lg-3">フリガナ</label>
-        <div class="col-lg-3">
-          <%= f.text_field :family_name_kana,autoforcus: true, autocomplete: "family_name_kana",  placeholder: "ヤマダ" %>
-        </div>
-        <div class="col-lg-3">
-          <%= f.text_field :first_name_kana,autoforcus: true, autocomplete: "first_name_kana",  placeholder: "ハナコ" %>
-        </div>
-      </div><br>
-      
-       <div class="row">
-        <label class="col-lg-3">郵便番号</label>
-        <div class="col-lg-3">
-          <%= f.text_field :postal_code,autoforcus: true, autocomplete: "postal_code",  placeholder: "0123456" %>
-        </div>
-      </div><br>
-      
-      <div class="row">
-        <label class="col-lg-3">住所</label>
-        <div class="col-lg-3">
-          <%= f.text_field :address,autoforcus: true, autocomplete: "address",  placeholder: "A県B市C町1-2-3" %>
-        </div>
-      </div><br>
-      
-      <div class="row">
-        <label class="col-lg-3">電話番号</label>
-        <div class="col-lg-3">
-          <%= f.text_field :phone_number,autoforcus: true, autocomplete: "phone_number",  placeholder: "08012345678" %>
-        </div>
-      </div><br>
+      <table class="table table-borderless ml-5">
+        <%= form_with model: @customer, url: admin_customer_path(@customer), method: :patch, local: true do |f| %>
 
-     <div class="row">
-        <label class="col-lg-3">メールアドレス</label>
-        <div class="col-lg-3">
-          <%= f.text_field :email,autoforcus: true, autocomplete: "email",  placeholder: "sample@exanple.com" %>
-        </div>
-      </div><br>
+          <tr>
+            <td>会員ID</td>
+            <td><%= @customer.id %></td>
+          </tr>
 
-    <div class="row">
-      <label class="col-lg-3">会員ステータス</label>
-      <div class="col-lg-3">
-        <div class="custom-control custom-radio custom-control-inline">
-          <%= f.radio_button :is_active, true, checked: @customer.is_active == true, class:'custom-control-input', id:'status-active' %>
-          <%= f.label :is_active, '有効', class: 'custom-control-label', for:'status-active' %>
-        </div>
+          <tr>
+            <td>名前</td>
+            <td>
+              <%= f.text_field :family_name, class: "form-control d-inline-block w-25",autofocus: true, autocomplete: "family_name",  placeholder: "山田" %>
+              <%= f.text_field :first_name, class: "form-control d-inline-block w-25", autocomplete: "first_name",  placeholder: "花子" %>
+            </td>
+          </tr>
 
-        <div class="custom-control custom-radio custom-control-inline">
-          <%= f.radio_button :is_active, false, checked: @customer.is_active == false, class: 'custom-control-input', id:'status-deleted' %>
-          <%= f.label :is_active, '退会済み', class: 'custom-control-label', for: 'status-deleted' %>
-        </div>
+          <tr>
+            <td>フリガナ</td>
+              <td>
+              <%= f.text_field :family_name_kana, class: "form-control d-inline-block w-25", autocomplete: "family_name_kana",  placeholder: "ヤマダ" %>
+              <%= f.text_field :first_name_kana, class: "form-control d-inline-block w-25", autocomplete: "first_name_kana",  placeholder: "ハナコ" %>
+            </td>
+          </tr>
 
-      </div>
-    </div><br>
+          <tr>
+            <td>郵便番号</td>
+            <td>
+              <%= f.text_field :postal_code, class: "form-control d-inline-block w-25", autocomplete: "postal_code",  placeholder: "0123456" %>
+            </td>
+          </tr>
 
-    <div class="row">
-      <div class="col-lg-12">
-        <div class="row">
-          <div class="col-lg-3"></div>
-          <div class="col-lg-9"><%= f.submit "変更を保存", class: "btn btn-success" %></div>
-        </div>
-      </div>
+          <tr>
+            <td>住所</td>
+            <td>
+              <%= f.text_field :address, class: "form-control d-inline-block w-50", autocomplete: "address",  placeholder: "A県B市C町1-2-3" %>
+            </td>
+          </tr>
+
+          <tr>
+            <td>電話番号</td>
+            <td>
+              <%= f.text_field :phone_number, class: "form-control d-inline-block w-25", autocomplete: "phone_number",  placeholder: "08012345678" %>
+            </td>
+          </tr>
+
+          <tr>
+            <td>メールアドレス</td>
+            <td>
+              <%= f.text_field :email, class: "form-control d-inline-block w-25", autocomplete: "email",  placeholder: "sample@example.com" %>
+            </td>
+          </tr>
+
+          <tr>
+            <td>会員ステータス</td>
+            <td>
+              <div class="custom-control custom-radio custom-control-inline">
+                <%= f.radio_button :is_active, true, checked: @customer.is_active == true, class:'custom-control-input', id:'status-active' %>
+                <%= f.label :is_active, '有効', class: 'custom-control-label', for:'status-active' %>
+              </div>
+              <div class="custom-control custom-radio custom-control-inline">
+                <%= f.radio_button :is_active, false, checked: @customer.is_active == false, class: 'custom-control-input', id:'status-deleted' %>
+                <%= f.label :is_active, '退会済み', class: 'custom-control-label', for: 'status-deleted' %>
+              </div>
+            </td>
+          </tr>
+
+          <tr>
+            <td></td>
+            <td>
+              <%= f.submit "変更を保存", class: "btn btn-success" %>
+            </td>
+          </tr>
+        <% end %>
+      </table>
+
     </div>
-
-  <% end %>
-
+  </div>
 </div>
