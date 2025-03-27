@@ -12,4 +12,13 @@ class Item < ApplicationRecord
   def with_tax_price
     (price * 1.1).floor
   end
+
+  # 検索機能のためのメソッド
+  scope :search_by_name, ->(query, match_type) {
+    case match_type
+    when 'partial' then where('name LIKE ?', "%#{query}%")
+    else all
+    end
+  }
+
 end

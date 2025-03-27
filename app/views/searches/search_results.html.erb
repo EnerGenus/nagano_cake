@@ -1,0 +1,118 @@
+<div class='container'>
+  <div class="row">
+    <% if @search_type == 'Customer' %>
+      <h4 class="d-inline-block p-2 m-4", style="background-color: #e0e0e0; color: #333;">
+        "<%= @query %>" で 会員を検索
+      </h4>
+    <% else @search_type == 'Item' %>
+      <h4 class="d-inline-block p-2 m-4", style="background-color: #e0e0e0; color: #333;">
+        "<%= @query %>" で 商品を検索
+      </h4>
+    <% end %>
+  </div>
+  <div class="row">
+    <div class="col-md-12">
+      <% if @results.any? %>
+        <table class ="table">
+          <!-- 会員についての検索結果 -->
+          <% if @search_type == 'Customer' %>
+            <thead style="background-color: #f1f1f1; color: #333;">
+              <tr>
+                <th>会員ID</th>
+                <th>氏名</th>
+                <th>メールアドレス</th>
+                <th>ステータス</th>
+              </tr>
+            </thead>
+            <tbody>
+              <% @results.each do |result| %>
+                <tr>
+                  <td>
+                    <%= result.id %>
+                  </td>
+                  <td>
+                    <%= link_to "#{result.family_name}#{result.first_name}", admin_customer_path(result), class: 'text-dark' %>
+                  </td>
+                  <td>
+                    <%= result.email %>
+                  </td>
+                  <td class="<%= result.is_active ? 'text-success font-weight-bold' : 'text-muted font-weight-bold' %>">
+                    <%= result.is_active ? '有効' : '退会' %>
+                  </td>
+                </tr>
+              <% end %>
+            </tbody>
+          <!-- 商品についての検索結果 -->
+          <% elsif @search_type == 'Item' %>
+            <!-- 管理者ログイン時 -->
+            <% if admin_signed_in? %>
+              <thead style="background-color: #f1f1f1; color: #333;">
+                <tr>
+                  <th>商品ID</th>
+                  <th>商品名</th>
+                  <th>税抜価格</th>
+                  <th>ジャンル</th>
+                  <th>ステータス</th>
+                </tr>
+              </thead>
+              <tbody>
+                <% @results.each do |result| %>
+                  <tr>
+                    <td class="align-middle">
+                      <%= result.id %>
+                    </td>
+                    <td class="align-middle">
+                      <%= link_to admin_item_path(result.id), class: 'text-dark' do %>
+                        <%= result.name %>
+                      <% end %>
+                    </td>
+                    <td class="align-middle">
+                      <%= result.price %>
+                    </td>
+                    <td class="align-middle">
+                      <%= result.genre.name %>
+                    </td>
+                    <td class="align-middle">
+                      <% if result.is_active %>
+                        <p class="text-success font-weight-bold">販売中</p>
+                      <% else %>
+                        <p class="text-muted font-weight-bold">販売停止中</p>
+                      <% end %>
+                    </td>
+                  </tr>
+                <% end %>
+              </tbody>
+            <!-- 会員ログインまたは未ログイン時 -->
+            <% else %>
+              <thead style="background-color: #f1f1f1; color: #333;">
+                <tr>
+                  <th>商品名</th>
+                  <th>商品説明</th>
+                  <th style="white-space: nowrap;">税込価格</th>
+                </tr>
+              </thead>
+              <tbody>
+                <% @results.each do |result| %>
+                  <tr>
+                    <td style="white-space: nowrap;">
+                      <%= image_tag result.item_image, size: "40x40" %>
+                      <%= link_to result.name, item_path(result.id) %>
+                    </td>
+                    <td>
+                      <%= result.description %>
+                    </td>
+                    <td>
+                      <%= result.with_tax_price.to_s(:delimited) %>
+                    </td>
+                  </tr>
+                <% end %>
+              </tbody>
+            <% end %>
+          <% end %>
+        </table>
+      <% else %>
+        <p>該当する結果は見つかりませんでした。</p>
+      <% end %>
+    </div>
+  </div>
+</div>
