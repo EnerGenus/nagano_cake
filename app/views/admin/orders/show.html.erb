@@ -5,67 +5,124 @@
 
 
 <div class="container">
-  <table>
-  <h4>注文履歴詳細</h4>
-    <tr>
-      <th>購入者</th>
-      <td><%= link_to @order.name, admin_customer_path %></td>
-    </tr>
-    <tr>
-      <th>注文日</th>
-      <td><%= @order.created_at %></td>
-    </tr>
-    <tr>
-      <th>配送先</th>
-      <td><%= @order.address %></td>
-    </tr>
-    <tr>
-      <th>支払方法</th>
-      <td><%= I18n.t("enums.order.payment_method.#{@order.payment_method}") %></td>
-    </tr>
-    <tr>
-      <th>注文ステータス</th>
-      <td>
-        <%= form_with model: @order,url: admin_order_path(@order), method: :patch, local: true do |f| %>
-          <div class="d-flex">
-          <%= f.select :status, options_for_select(Order.statuses_i18n, @order.status), class: "form-select w-auto" %>
-          <%= f.submit "更新", class: "btn btn-primary" %>
-        <% end %>
-      </td>
-    </tr>
-  </table>
+  <div class="row my-3">
+    <h3 class="d-inline-block p-2 m-4", style="background-color: #e0e0e0; color: #333;">注文履歴詳細</h3>
+  </div>
+  <div class="row">
+    <div class="col-3">
+      <strong>購入者</strong>
+    </div>
+    <div class="col-4">
+      <%= link_to @customer_name, admin_customer_path, class:"text-dark" %>
+    </div>
+  </div>
+  <div class="row">
+    <div class="col-3">
+      <strong>注文日</strong>
+    </div>
+    <div class="col-4" >
+      <%= @order.created_at.strftime("%Y/%m/%d") %>
+    </div>
+  </div>
+  <div class="row">
+    <div class="col-3">
+      <strong>配送先</strong>
+    </div>
+    <div class="col-4" >
+      <div class = "row">
+        〒<%= @order.postal_code %>  <%= @order.address %>
+      </div>
+      <div class = "row">
+        <%= @order.name %>
+      </div>
+    </div>
+  </div>
+  <div class="row">
+    <div class="col-3">
+      <strong>支払方法</strong>
+    </div>
+    <div class="col-4" >
+      <%= I18n.t("enums.order.payment_method.#{@order.payment_method}") %>
+    </div>
+  </div>
+  <div class="row mb-2">
+    <div class="col-3">
+      <strong>注文ステータス</strong>
+    </div>
+    <%= form_with model: @order,url: admin_order_path(@order), method: :patch, local: true do |f| %>
+    <div class="col-4 d-flex">
+      <div>
+        <%= f.select :status, options_for_select(Order.statuses_i18n, @order.status), class: "form-select w-auto" %>
+      </div>
+      <div class="ml-5">
+        <%= f.submit "更新", class: "btn btn-success" %>
+      </div>
+    </div>
+    <% end %>
+  </div>
 </div>
 
 <div class="container">
-  <table class="table table-bordered">
-    <thead>
-      <tr>
-        <th>商品名</th>
-        <th>単価(税込)</th>
-        <th>数量</th>
-        <th>小計</th>
-        <th>製作ステータス</th>
-      </tr>
-    </thead>
-    <tbody>
-      <% @order_details.each do |order_detail| %>
+  <div class="row">
+    <table class="table col-lg-8">
+      <thead style="background-color: #f1f1f1; color: #333;">
         <tr>
-          <td><%= order_detail.item.name %></td>
-          <td><%= (order_detail.item.price * 1.1).to_i %></td>
-          <td><%= order_detail.amount_ordered %></td>
-          <td><%= (order_detail.item.price * 1.1 * order_detail.amount_ordered).to_i %></td>
-          <td>
+          <th>商品名</th>
+          <th>単価(税込)</th>
+          <th>数量</th>
+          <th>小計</th>
+          <th>製作ステータス</th>
+          <th></th>
+        </tr>
+      </thead>
+      <tbody>
+        <% @order_details.each do |order_detail| %>
+          <tr>
+            <td><%= order_detail.item.name %></td>
+            <td><%= (order_detail.item.price * 1.1).to_i %></td>
+            <td><%= order_detail.amount_ordered %></td>
+            <td><%= (order_detail.item.price * 1.1 * order_detail.amount_ordered).to_i %></td>
             <%= form_with model: order_detail, url: admin_order_detail_path(order_detail), method: :patch, local: true do |f| %>
+            <td>
               <div class="d-flex">
                 <%= f.select :making_status, 
-                      options_for_select(OrderDetail.making_statuses.keys.map { |key| [OrderDetail.making_statuses_i18n[key], key] }, order_detail.making_status), 
-                      class: "form-select w-auto" %>
-                <%= f.submit "更新", class: "btn btn-primary ms-2" %>
+                  options_for_select(OrderDetail.making_statuses.keys.map { |key| [OrderDetail.making_statuses_i18n[key], key] }, order_detail.making_status), 
+                  class: "form-select w-auto" %>
               </div>
+            </td>
+            <td>
+              <%= f.submit "更新", class: "btn btn-success ms-2" %>
+            </td>
             <% end %>
-          </td>
-        </tr>
-      <% end %>
-    </tbody>
-  </table>
+          </tr>
+        <% end %>
+      </tbody>
+    </table>
+    <div class="col-lg-4 justify-content-center mt-auto mb-3">
+      <div class="row">
+        <div class="col-6">
+          <strong>商品合計</strong>
+        </div>
+        <div class="col-6">
+          <%= @order.total_payment %>円
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-6">
+          <strong>送料</strong>
+        </div>
+        <div class="col-6">
+          <%= @order.shipping_cost %>円
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-6">
+          <strong>請求金額合計</strong>
+        </div>
+        <div class="col-6">
+          <strong><%= @order.total_payment + @order.shipping_cost %>円</strong>
+        </div>
+      </div>
+    </div>
+  </div>
 </div>
