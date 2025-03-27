@@ -1,32 +1,36 @@
-<div class="container justify-content-center">
-  <div class="row pt-3 justify-content-center">
-    <p>
-      ようこそ、ながのCAKEへ！</br>
-      このサイトは、ケーキ販売のECサイトになります。</br>
-      会員でない方も商品の閲覧はできますが、</br>
-      購入には会員登録が必要になります。
-    </p>
-  </div>
-  <div class="row justify-content-center">
-    <div class="col-xxl-10">
-      <h2>新着商品</h2>
-      <div class="d-flex flex-wrap">
-        <% @items.each do |item| %>
-          <% if item.present? %>
-            <div class="card m-2 p-1 card-hover">
-              <%= link_to item_path(item.id) do %>
-                <%= image_tag item.item_image, size: "150x150" %>
+<div class="container-fluid">
+  <div class="row m-5 justify-content-center">
+    <div class="col-xxl-3 ml-6">
+      <%= render 'public/items/sidebar', genres: @genres %>
+    </div>
+    <div class="col-9 px-sm-0 ml-5 justify-content-center">
+      <p>
+        ようこそ、ながのCAKEへ！</br>
+        このサイトは、ケーキ販売のECサイトになります。</br>
+        会員でない方も商品の閲覧はできますが、</br>
+        購入には会員登録が必要になります。
+      </p>
+      <div class="row">
+        <div class="col-xxl-10">
+          <h2>新着商品</h2>
+          <div class="d-flex col-12 my-3 text-center text-xs-center text-sm-center text-md-left">
+            <% @items.each do |item| %>
+              <% if item.present? %>
+                <div class="card m-4 p-1 card-hover border-0">
+                  <%= link_to item_path(item.id) do %>
+                    <%= image_tag item.item_image, width: 220, height: 160, class: "img-resize, rounded mx-auto d-block", style: "object-fit: cover;" %>
+                  <% end %>
+                  <div class="card-body text-body">
+                    <h5 class="card-title"><%= item.name %></h5>
+                    <p class="card-text">¥ <%= item.with_tax_price.to_s(:delimited) %></p>
+                  </div>
+                </div>
               <% end %>
-              <div class="card-body text-body">
-                <p class="card-title"><%= item.name %></p>
-                <p class="card-text">¥ <%= item.with_tax_price %></p>
-              </div>
-            </div>
-          <% end %>
-        <% end %>
+            <% end %>
+          </div>
+          <div class = "row pr-5 justify-content-end"><%= link_to "全ての商品を見る＞", items_path %></div>
+        </div>
       </div>
-      <div class = "row pr-5 justify-content-end"><%= link_to "全ての商品を見る＞", items_path %></div>
     </div>
   </div>
-  
 </div>

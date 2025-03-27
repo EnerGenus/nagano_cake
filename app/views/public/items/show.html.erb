@@ -1,23 +1,30 @@
 <%= render 'layouts/error_message', obj: @cart_item %>
-<div class="container-fluid position-relative">
-  <div class="row d-flex flex-wrap">
-    <div class="col-12 col-md-4 text-center" style="padding: 50px;">
-      <%= image_tag @item.item_image,  width: 400, height: 280, class: "img-resize, rounded d-block", style: "object-fit: cover; max-width: 100%;" %>
+<div class="container-fluid">
+  <div class="row m-5 justify-content-center">
+    <div class="col-xxl-3 ml-6">
+      <%= render 'sidebar', genres: @genres %>
     </div>
-    <div class="col-12 col-md-8" style="padding-top: 50px;">
-      <h3><strong><%= @item.name %></strong></h3>
-      <h5 class="py-3"><%= @item.description %></h5>
-      <div class="d-flex align-items-end py-4">
-        <h3 class="mb-0">¥ <%= @item.with_tax_price.to_s(:delimited) %></h3>
-        <p class="mb-0 ms-2">(税込）</p>
+    <div class="col-9 px-sm-0 ml-5 d-flex">
+      <div class="row">
+        <div class="col-md-4 text-center">
+          <%= image_tag @item.item_image,  width: 400, height: 280, class: "img-resize, rounded d-block", style: "object-fit: cover; max-width: 100%;" %>
+        </div>
+        <div class="col-md-8">
+          <h3><strong><%= @item.name %></strong></h3>
+          <h5 class="py-3"><%= @item.description %></h5>
+          <div class="d-flex align-items-end py-4">
+            <h3 class="mb-0">¥ <%= @item.with_tax_price.to_s(:delimited) %></h3>
+            <p class="mb-0 ms-2">(税込）</p>
+          </div>
+            <% if customer_signed_in? %>
+              <%= form_with model: @cart_item, url: cart_items_path, method: :post do |f| %>
+                <%= f.hidden_field :item_id, value: @item.id  %>
+                <%= f.select :amount, *[1..10].to_a, include_blank: "個数選択" %>
+                <%= f.submit "カートに入れる", class: 'btn btn-success'%>
+              <% end %>
+            <% end %>
+        </div>
       </div>
-        <% if customer_signed_in? %>
-        <%= form_with model: @cart_item, url: cart_items_path, method: :post do |f| %>
-          <%= f.hidden_field :item_id, value: @item.id  %>
-          <%= f.select :amount, *[1..10].to_a, include_blank: "個数選択" %>
-          <%= f.submit "カートに入れる", class: 'btn btn-success'%>
-        <% end %>
-      <% end %>
     </div>
   </div>
 </div>

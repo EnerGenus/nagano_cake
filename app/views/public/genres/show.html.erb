@@ -1,0 +1,34 @@
+<div class="container">
+  <div class="row" style="padding: 50px;">
+    <div class="col-md-3">
+      <%= render 'public/items/sidebar', genres: @genres %>
+    </div>
+    <div class="col-md-9">
+      <div class="d-flex">
+        <h2>検索結果</h2><p class="mb-0">(全<%= @items.count %>件)</p>
+      </div>
+      <div class="card-deck">
+        <%  @genre.items.each do |item| %>
+          <% if item.is_active == true %>
+            <div class="card text-center border-0" style="min-width: 230px; max-width: 250px;">
+              <div class="card-img-top" >
+                <%= link_to item_path(item.id) do %>
+                  <% if item.item_image.attached? %>
+                    <%= image_tag item.item_image, width: 220, height: 160, class: "img-resize, rounded mx-auto d-block", style: "object-fit: cover;"  %>
+                  <% end %>
+                <% end %>
+                <div class="card-text">
+                  <h5 class="card-title"><%= item.name %></h5>
+                  <p>￥<%= item.with_tax_price.to_s(:delimited) %></p>
+                </div>
+              </div>
+            </div>
+          <% end %>
+        <% end %>
+      </div>
+      <div class="col-12 d-flex justify-content-center">
+        <%= paginate @items %>
+      </div>
+    </div>
+  </div>
+</div>

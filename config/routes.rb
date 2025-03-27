@@ -20,6 +20,7 @@ Rails.application.routes.draw do
     patch 'customers/withdraw' => 'customers#withdraw', as:'withdraw' #退会処理用のアクションパス
     get 'orders/done'
     post 'orders/confirm'
+    resources :genres, only: [:show]
     resources :addresses, only: [:index, :create, :edit, :update, :destroy]
     resources :items, only: [:index, :show]
     resources :cart_items, only: [:index, :create, :update, :destroy]
