@@ -9,6 +9,7 @@ class SearchesController < ApplicationController
       @results = Customer.search_by_fullname(@query, @match_type)
     elsif @search_type == 'Item'
       @results = Item.search_by_name(@query, @match_type)
+      @pub_results = Item.where(is_active: true).search_by_name(@query, @match_type)
     else
       @results = []  # どちらにも該当しない場合、@results は空の配列 [] になる
     end
