@@ -5,10 +5,10 @@
     </div>
     <div class="col-md-9">
       <div class="d-flex">
-        <h2><%= @genre.name %>一覧</h2><p class="mb-0">(全<%= @items.count %>件)</p>
+        <h2><%= @genre.name %>一覧</h2><p class="mb-0">(全<%= @all_items.count %>件)</p>
       </div>
       <div class="card-deck">
-        <%  @genre.items.each do |item| %>
+        <%  @items.each do |item| %>
           <% if item.is_active == true %>
             <div class="card text-center border-0" style="min-width: 230px; max-width: 250px;">
               <div class="card-img-top" >
