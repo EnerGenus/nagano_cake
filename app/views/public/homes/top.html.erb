@@ -1,36 +1,57 @@
 <div class="container-fluid">
-  <div class="row m-5 justify-content-center">
-    <div class="col-xxl-3 ml-6">
+  <div class="row justify-content-center ">
+
+    <div class="col-2 p-3">
       <%= render 'public/items/sidebar', genres: @genres %>
     </div>
-    <div class="col-9 px-sm-0 ml-5 justify-content-center">
-      <p>
-        ようこそ、ながのCAKEへ！</br>
-        このサイトは、ケーキ販売のECサイトになります。</br>
-        会員でない方も商品の閲覧はできますが、</br>
-        購入には会員登録が必要になります。
-      </p>
-      <div class="row">
-        <div class="col-xxl-10">
-          <h2>新着商品</h2>
-          <div class="d-flex col-12 my-3 text-center text-xs-center text-sm-center text-md-left">
-            <% @items.each do |item| %>
-              <% if item.present? %>
-                <div class="card m-4 p-1 card-hover border-0">
-                  <%= link_to item_path(item.id) do %>
-                    <%= image_tag item.item_image, width: 220, height: 160, class: "img-resize, rounded mx-auto d-block", style: "object-fit: cover;" %>
-                  <% end %>
-                  <div class="card-body text-body">
-                    <h5 class="card-title"><%= item.name %></h5>
-                    <p class="card-text">¥ <%= item.with_tax_price.to_s(:delimited) %></p>
-                  </div>
-                </div>
-              <% end %>
-            <% end %>
+
+      <div class="col-8 px-3 pt-2 d-flex align-item-center justify-content-center">
+        <div class="about-txt">
+          <div class="text-center p-5", style="width: 100%;
+            height: 100%;
+            background-image: url(<%= asset_path('nagano_cake_バナー.png') %>);
+            background-size: cover;
+            background-position: center;">
+              <p class="bg-white p-3 rounded" style="opacity: 90%;">
+                ようこそ、ながのCAKEへ！<br>
+                このサイトは、ケーキ販売のECサイトになります。<br>
+                会員でない方も商品の閲覧はできますが、<br>
+                購入には会員登録が必要になります。
+              </p>
           </div>
-          <div class = "row pr-5 justify-content-end"><%= link_to "全ての商品を見る＞", items_path %></div>
         </div>
       </div>
-    </div>
   </div>
+
+        <div class="row justify-content-center ">
+          <div class="col-8 offset-2">
+            <h2>新着商品</h2>
+              <div class="row">
+                <% @items.each do |item| %>
+                  <% if item.present? %>
+                    <div class="col-3">
+                      <div class="card p-1 card-hover border-0">
+                        <%= link_to item_path(item.id) do %>
+                          <%= image_tag item.item_image, width: 220, height: 160, class: "img-resize rounded mx-auto d-block", style: "object-fit: cover;" %>
+                        <% end %>
+                        <div class="card-body text-body">
+                          <h5 class="card-title"><%= item.name %></h5>
+                          <p class="card-text">¥ <%= item.with_tax_price.to_s(:delimited) %></p>
+                        </div>
+                      </div>
+                    </div>
+                  <% end %>
+                <% end %>
+              </div>
+            </div>
+          </div>
+
+      </div>
+
+          <div class = "d-flex justify-content-end mx-3 mb-3">
+            <%= link_to "全ての商品を見る＞", items_path %></div>
+          </div>
+
+
+
 </div>
