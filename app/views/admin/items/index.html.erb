@@ -34,7 +34,7 @@
                   <%= item.name %>
                 <% end %>
               </td>
-              <td class="align-middle"><%= item.price %></td>
+              <td class="align-middle"><%= item.price.to_s(:delimited) %></td>
               <td class="align-middle"><%= item.genre.name %></td>
               <td class="align-middle">
                 <% if item.is_active %>

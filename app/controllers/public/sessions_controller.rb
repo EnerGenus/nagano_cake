@@ -19,11 +19,6 @@ class Public::SessionsController < Devise::SessionsController
   end
 
   protected
-
-  def after_sign_in_path_for(resource_or_scope)
-    customers_mypage_path
-  end
-
   def reject_customer
     @customer = find_by(email: params[:customer][:email])
     if @customer
