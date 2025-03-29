@@ -19,7 +19,6 @@ class Public::SessionsController < Devise::SessionsController
   end
 
   protected
-
   def reject_customer
     @customer = find_by(email: params[:customer][:email])
     if @customer
